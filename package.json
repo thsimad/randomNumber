@@ -7,5 +7,21 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Imad",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "helmet": "^3.13.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.2.13",
+    "nodemailer": "^4.6.8",
+    "passport": "^0.4.0",
+    "passport-linkedin-oauth2": "^1.5.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.5.0"
+  }
 }

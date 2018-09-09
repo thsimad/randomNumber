@@ -1,0 +1,1 @@
+module.exports = 'ReferenceError: secCode is not defined';

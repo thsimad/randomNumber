@@ -1,0 +1,12 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+.logo{
+    height: 35px;
+    width: 55px;
+}
+.footer {
+    padding-bottom: 65px;
+    text-align: center;
+}

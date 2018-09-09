@@ -1,0 +1,25 @@
+<DOCTYPE! <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Startups-Incubators</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
+    <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img class="logo" src="./logo.png"></a>
+        <%if(user){%>
+            <ul class="navbar-nav ml-auto desktop-links">
+                <a class="nav-link ml-auto desktop-links" style="color: black;" href="/logout"><i class="fas fa-sign-out-alt"></i><span data-toggle="tooltip" data-placement="bottom" title="Logout"></span></a>
+            </ul>
+            <div style="float: right;">
+                <span style="padding-right: 10px;" data-toggle="tooltip" data-placement="bottom" title="Logout"><a class="mobile-links nav-link change unsolid" href="/logout"><i class="fas fa-sign-out-alt"></i></a></span>
+            </div>                               
+        <%}else{%>
+        <%}%> 
+    </nav>
