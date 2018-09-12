@@ -48,7 +48,7 @@ var UserSchema = new mongoose.Schema({
     codingBackground:{
         type: String
     },
-    joiningObjectives:{
+    joiningObjective:{
         type: String
     },
     batchType:{

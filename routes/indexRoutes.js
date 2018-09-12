@@ -69,6 +69,7 @@ router.put('/form',isLogedIn, (req, res)=>{
         if(err){
             console.log(err);
             req.flash('error', 'Something went wrong, please try again later!');
+            res.redirect('/form')
         }else{
             const mailOptions = {
                 from: '"The Hacking School" <demotestingapp@gmail.com>', // sender address
