@@ -3,6 +3,13 @@ const   express     = require('express'),
         User        = require('../models/user'),  
         router      = express.Router();
 //home route
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+           user: mailPs.email,
+           pass: mailPs.password
+       }
+   });
 router.get('/home', isLogedIn, (req, res)=>{
     res.render('home');
 });
