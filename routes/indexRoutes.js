@@ -71,7 +71,7 @@ router.put('/form',isLogedIn, (req, res)=>{
             req.flash('error', 'Something went wrong, please try again later!');
             res.redirect('/form')
         }else{
-            const mailOptions = {
+            var mailOptions = {
                 from: '"The Hacking School" <demotestingapp@gmail.com>', // sender address
                 to: 'meraj@thehackingschool.com', // list of receivers
                 subject: 'New application received from '+data.name, // Subject line
@@ -84,7 +84,7 @@ router.put('/form',isLogedIn, (req, res)=>{
                 else
                   console.log(info);
              });
-             const mailOptions = {
+             mailOptions = {
                 from: '"The Hacking School" <demotestingapp@gmail.com>', // sender address
                 to: 'erimadahmad@gmail.com', // list of receivers
                 subject: 'New application received from '+data.name, // Subject line
