@@ -7,6 +7,7 @@ const   express         = require('express'),
         passport        = require('passport'),
         flash           = require('connect-flash'),
         LinkedInStrategy= require('passport-linkedin-oauth2').Strategy,
+        FacebookStrategy        = require('passport-facebook'),
         mongooseKey     = require('./private/mongooseKey'),
         methodOverride  = require('method-override'),
         nodemailer      = require('nodemailer'),
@@ -18,7 +19,9 @@ const   express         = require('express'),
         linkedinKey     = require('./private/linkedinKey')
         port            = process.env.PORT || 3000,
         helmet          = require('helmet'),
-        compression     = require('compression'),    
+        compression     = require('compression'),
+        mailPs          = require('./private/mailPs') 
+        fbKey                   = require('./Private/facebookKey'),
         path            = require('path');
 //mlab connect
 mongoose.connect(mongooseKey.url,  { useNewUrlParser: true })
@@ -48,8 +51,8 @@ app.use(flash());
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-           user: "",
-           pass: ""
+           user: mailPs.email,
+           pass: mailPs.password
        }
     });
 //express-session config
@@ -87,6 +90,9 @@ passport.use(new LinkedInStrategy({
                 });
         });
   }));
+
+  //facebook oauth
+  //Facebook Oauth Config.
 //Passport Config.
 passport.serializeUser((user, done) => {
     done(null, user);

@@ -10,3 +10,22 @@ html, body{
     padding-bottom: 65px;
     text-align: center;
 }
+.radioFont{
+    font-size: 15px;
+}
+.formH{
+    width: 75%;
+    margin: auto;
+    padding-top: 1%;
+}
+.input-link{
+    padding-left: 30px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.rg-from{
+    font-size: 1.15em;
+}
+@media(max-width: 600px){
+    
+}

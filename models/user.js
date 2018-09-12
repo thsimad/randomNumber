@@ -9,6 +9,9 @@ var UserSchema = new mongoose.Schema({
      type: String,
      required: true
     },
+    skills:{
+        type:String
+    },
 	email: {
         type: String,
         lowercase: true
@@ -23,6 +26,9 @@ var UserSchema = new mongoose.Schema({
         type: String
     },
     userBuild:{
+        type: String
+    },
+    skypeId:{
         type: String
     },
     links:{
@@ -49,6 +55,9 @@ var UserSchema = new mongoose.Schema({
         type: String
     },
     source:{
+        type: String
+    },
+    expectations:{
         type: String
     },
     recommendation:{
