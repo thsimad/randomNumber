@@ -20,7 +20,6 @@ const   express         = require('express'),
         helmet          = require('helmet'),
         compression     = require('compression'),
         mailPs          = require('./private/mailPs') 
-        fbKey                   = require('./Private/facebookKey'),
         path            = require('path');
 //mlab connect
 mongoose.connect(mongooseKey.url,  { useNewUrlParser: true })
