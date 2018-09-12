@@ -72,8 +72,8 @@ router.put('/form',isLogedIn, (req, res)=>{
         }else{
             const mailOptions = {
                 from: '"The Hacking School" <demotestingapp@gmail.com>', // sender address
-                to: 'erimadahmad@gmail.com', // list of receivers
-                subject: 'New application received from'+data.name, // Subject line
+                to: 'meraj@thehackingschool.com, erimadahmad@gmail.com', // list of receivers
+                subject: 'New application received from '+data.name, // Subject line
                 html: ' <h1>'+data.name+'</h1><h3>Skills:</h3> <p>'+data.skills+'</p> <h3>1. Name:</h3> <p>'+data.name+'</p> <h3>2. Email:</h3><p>'+data.email+'</p><h3>3. Mobile:</h3><p>'+data.mobile+'</p> <h3>4. What do you currently do?</h3><p>'+data.designation+'</p><h3>5. Do you have background in coding?</h3><p>'+data.codingBackground+'</p><h3>6. Your objective of joining our bootcamp Career</h3><p>'+data.joiningObjective+'</p><h3>7. Which batch are you looking to join?</h3><p>'+data.batchType+'</p> <h3>8. How did you hear about us?</h3><p>'+data.source+'</p> <h3>9. What is your expectation from the program?</h3><p>'+data.expectations+'</p>'
                  
               };
