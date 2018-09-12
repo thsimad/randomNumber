@@ -1,0 +1,14 @@
+<%if(successMessage.length === 0){%>
+
+    <%}else{%>
+        <div align="center" class="alert alert-success" role="alert">
+                <%=successMessage%>
+        </div>
+    <%}%>
+    <%if(errMessage.length === 0){%>
+
+    <%}else{%>
+        <div align="center" class="alert alert-danger" role="alert">
+            <%=errMessage%>
+        </div>
+<%}%>
