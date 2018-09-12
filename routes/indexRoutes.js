@@ -2,6 +2,7 @@ const   express     = require('express'),
         isLogedIn   = require('../private/isLogedIn'),
         User        = require('../models/user'),  
         nodemailer      = require('nodemailer'),
+        mailPs          = require('../private/mailPs'),
         router      = express.Router();
 //home route
 let transporter = nodemailer.createTransport({
