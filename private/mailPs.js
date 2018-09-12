@@ -1,6 +1,6 @@
 const mail = {
-    email: 'erimadahmad@gmail.com',
-    password: 'Awarapan12'
+    email: 'demotestingprojects@gmail.com',
+    password: 'Password@gmail'
 }
 
 module.exports = mail;
