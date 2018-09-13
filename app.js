@@ -41,9 +41,10 @@ app.use(express.static('public'));
 //config methodOverride for put and delete routes
 app.use(methodOverride('_method'));
 //adding favicon to over webpage
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
-//adding flash messages(success or error)
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+//
 // app.use(express.csrf());
+// adding flash messages(success or error)
 app.use(flash());
 //Nodemailer Config
 let transporter = nodemailer.createTransport({

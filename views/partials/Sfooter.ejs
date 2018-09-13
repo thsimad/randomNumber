@@ -1,0 +1,18 @@
+<script src="./jquery.min.js"></script>        
+<script src="./app.js"></script>
+<script src="./popper.min.js"></script>
+<script src="./bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {  
+    window.setInterval(function() {
+    var timeLeft    = $("#timeLeft").html();                                
+        if(eval(timeLeft) == 0){
+                window.location= ("http://www.thehackingschool.com");                 
+        }else{              
+            $("#timeLeft").html(eval(timeLeft)- eval(1));
+        }
+    }, 1000); 
+}); 
+</script>
+</body>
+</html>
