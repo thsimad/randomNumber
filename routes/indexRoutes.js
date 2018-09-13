@@ -28,7 +28,12 @@ router.get('/register', (req, res)=>{
     }
 });
 router.get('/form', isLogedIn, (req, res)=>{
-    res.render('form');
+    if(req.user.designation === undefined){
+        req.flash('error', 'You have already submitted your request.');
+        res.redirect('/home')
+    }else{
+        res.render('form');
+    }
 });
 router.put('/form',isLogedIn, (req, res)=>{
     let name        = req.body.name,
