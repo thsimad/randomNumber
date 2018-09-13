@@ -29,10 +29,10 @@ router.get('/register', (req, res)=>{
 });
 router.get('/form', isLogedIn, (req, res)=>{
     if(req.user.designation === undefined){
-        req.flash('error', 'You have already submitted your request.');
-        res.redirect('/register')
+        res.render('form');        
     }else{
-        res.render('form');
+        req.flash('error', 'You have already submitted your request.');
+        res.redirect('/home')
     }
 });
 router.put('/form',isLogedIn, (req, res)=>{
