@@ -27,7 +27,7 @@ router.get('/register', (req, res)=>{
         res.redirect('/profile')
     }
 });
-router.get('/form', isLogedIn, (req, res)=>{
+router.get('/form', (req, res)=>{
     res.render('form');
 });
 router.put('/form',isLogedIn, (req, res)=>{

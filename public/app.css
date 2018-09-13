@@ -22,6 +22,12 @@ html, body{
 .formB{
     background-color: white;
 }
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: rgb(113, 179, 105);
+}
+.formP{
+    padding: 40px;
+}
 .input-link{
     padding-left: 30px;
     padding-bottom: 5px;
@@ -37,5 +43,8 @@ html, body{
 @media(max-width: 600px){
     .formH{
         width: 100%;
+    }
+    .btnf{
+    width: 100%;
     }
 }
