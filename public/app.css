@@ -1,6 +1,7 @@
 html, body{
     height: 100%;
     width: 100%;
+    background-color: rgb(226, 226, 226)
 }
 .logo{
     height: 35px;
@@ -17,6 +18,9 @@ html, body{
     width: 75%;
     margin: auto;
     padding-top: 1%;
+}
+.formB{
+    background-color: white;
 }
 .input-link{
     padding-left: 30px;
