@@ -26,6 +26,12 @@ html, body{
 .rg-from{
     font-size: 1.15em;
 }
+.linkedinb{
+    height: 50px;
+    width: 250px
+}
 @media(max-width: 600px){
-    
+    .formH{
+        width: 100%;
+    }
 }
