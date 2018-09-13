@@ -13,7 +13,12 @@ let transporter = nodemailer.createTransport({
        }
    });
 router.get('/home', isLogedIn, (req, res)=>{
-    res.render('home');
+    if(user.designation === undefined){
+        req.flash('error', 'Please add your details first.');
+        res.redirect('/form')
+    }else{
+        res.render('home');
+    }
 });
 router.get('/register', (req, res)=>{
     if(!req.user){
