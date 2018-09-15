@@ -24,19 +24,6 @@ router.get('/home', isLogedIn, (req, res)=>{
 router.get('/register', (req, res)=>{
     var data;
     if(!req.user){
-        var mailOptions = {
-            from: '"The Hacking School" <app@thehackingschool.com>', // sender address
-            to: 'erimadahmad@gmail.com', // list of receivers
-            subject: 'New application received from ', // Subject line
-            html: ' Hi'
-             
-          };
-          transporter.sendMail(mailOptions, function (err, info) {
-            if(err)
-              console.log(err)
-            else
-              console.log(info);
-         });
         res.render('register');
     }else{
         var mailOptions = {
