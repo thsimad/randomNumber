@@ -22,6 +22,15 @@ var UserSchema = new mongoose.Schema({
     description:{
         type: String
     },
+    linkedinProfileUrl:{
+        type: String
+    },
+    linkedinUrl:{
+        type: String
+    },
+    linkedinHeadline:{
+        type: String
+    },
     skills:{
         type: String
     },

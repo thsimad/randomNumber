@@ -22,6 +22,7 @@ const   express         = require('express'),
         mailPs          = require('./private/mailPs') 
         path            = require('path');
 //mlab connect
+// mongoose.connect('mongodb://localhost:27017/THS', {useNewUrlParser: true});
 mongoose.connect(mongooseKey.url,  { useNewUrlParser: true })
 //initializing helmet
 app.disable( 'x-powered-by' );
@@ -71,6 +72,7 @@ passport.use(new LinkedInStrategy({
     scope: ['r_emailaddress', 'r_basicprofile'],
     }, function(accessToken, refreshToken, profile, done) {
             let data = profile;
+            console.log(data);
             process.nextTick(function () {
                 User.findOne({linkedinId: profile.id}).then((currentUser) => {
                     if(currentUser){
@@ -79,7 +81,10 @@ passport.use(new LinkedInStrategy({
                         new User({ 
                             linkedinId: profile.id,
                             name: data.displayName,
-                            email: data.emails[0].value
+                            email: data.emails[0].value,
+                            linkedinProfileUrl: data._json.pictureUrl,
+                            linkedinUrl: data._json.publicProfileUrl,
+                            linkedinHeadline: data._json.headline
                             }, function (err, user) {
                                 return cb(err, user);
                                 }).save().then((newUser)=>{

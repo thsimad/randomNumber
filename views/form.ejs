@@ -1,111 +1,126 @@
 <%- include partials/header %>
-
-<div class="container">
-   <div class="formH">
-    <%- include partials/flash %>
-        <form action="/form?_method=PUT" method="post" class="border formB border-light">
-            <div class="formP">
-                <div>
-                    <h2>A bit about you</h2>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Describe yourself*</label>
-                    <input class="form-control" type="text" name="description" required class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Skills*</label>
-                    <input class="form-control" type="text" name="skills" required class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Tell us something amazing you built*</label>
-                    <input class="form-control" type="text" name="userBuild" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Where are you based?*</label>
-                    <input class="form-control" type="text" name="location" required class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Links*</label>
-                    <div class="input-link">
-                        <input class="form-control links" type="text" name="twitter" placeholder="Twitter">
-                    </div>
-                    <div class="input-link">
-                        <input class="form-control links" type="text" required name="linkedin" placeholder="Linkedin">
-                    </div>
-                    <div class="input-link">
-                        <input class="form-control links" type="text" name="facebook" placeholder="Facebook">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Skype ID*</label>
-                    <input class="form-control" type="text" name="skypeId" class="form-control" id="usr">
-                </div>
-                <div>
-                    <h2>Questions</h2>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr" >Name*</label>
-                    <input class="form-control" type="text" name="name" value="<%=user.name%>"id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Email*</label>
-                    <input class="form-control inputF" type="email" required name="email" value="<%=user.email%>" id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Mobile*</label>
-                    <input class="form-control inputF" type="tel" name="mobile" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">What do you currently do?*</label><br>
-                    <label class="radio radioFont"><input class="inputF" name="designation"  type="radio" value="Student(+2)"> Student(+2)</label><br>
-                    <label class="radio"><input class="inputF" name="designation" type="radio"  value="Student(Undergrad)"> Student(Undergrad)</label><br>
-                    <label class="radio"><input class="inputF" name="designation" type="radio" value="Entrepreneur"> Entrepreneur</label><br>
-                    <label class="radio"><input class="inputF" name="designation" type="radio" value="Techie"> Techie</label><br>
-                    <label class="radio"><input class="inputF" name="designation" type="radio" value="Work at startup"> Work at startup</label><br>
-                    <label class="radio"><input class="inputF" name="designation" type="radio" value="Work at MNC"> Work at MNC</label><br>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Do you have background in coding?*</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="codingBackground" required value="None"> None</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="codingBackground" value="Basic"> Basic</label><br>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Your objective of joining our bootcamp*</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="Career change"> Career change</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="Adding a new skillset"> Adding a new skillset</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="I am entrepreneur looking to build a product"> I am entrepreneur looking to build a product</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="Just a hobby"> Just a hobby</label><br>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Which batch are you looking to join?*</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="batchType" value="Full-time"> Full-time</label><br>
-                    <label class="radio"><input class="inputF" type="radio" name="batchType" value="Part-time"> Part-time</label><br>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">How did you hear about us?*</label><br>
-                    <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Search Engine"> Search Engine</label><br>
-                    <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Word-of-mouth"> Word-of-mouth</label><br>
-                    <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Just a hobby"> Just a hobby</label><br>
-                    <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Print/Online media"> Print/Online media</label><br>
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">What is your expectation from the program?*</label><br>
-                    <input class="form-control inputF" name="expectations" type="text" id="usr">
-                </div>
-                <div class="form-group">
-                    <label class="rg-from" for="usr">Ask for new Recommendations?</label>
-                    <input class="form-control inputF" type="text" name="recommendation" class="form-control" id="usr">
-                </div>
-                <br>
-                <br>
-                <div style="text-align:center;">
-                    <p>Are you done? Connect now to finalize</p>
-                    <button class="btn btnf btn-primary btn-lg" type="submit">CONNECT NOW</button>
-                </div>
+<div class="row" style="padding-top: 3%;">
+    <div class="col-lg-3">
+        <%if(user){%>
+            <div class="profile">
+                <%if(user.linkedinProfileUrl === undefined){%>
+                    <img class="profileImage" src="https://i.imgur.com/V0ZBBeO.png" alt="<%=user.name%>">
+                <%}else{%>
+                    <img class="profileImage" src="<%=user.linkedinProfileUrl%>" alt="<%=user.name%>">
+                <%}%>
+                <h4><%=user.name%></h4>
+                <h6><%=user.linkedinHeadline%></h6>
             </div>
-
-        </form>
-   </div>
+        <%}else{%>
+        <%}%>
+    </div>
+    <div class="col-lg-9">
+        <div class="container">
+            <div class="formH">
+                <%- include partials/flash %>
+                    <form action="/form?_method=PUT" method="post" class="border formB border-light">
+                        <div class="formP">
+                            <div>
+                                <h2>A bit about you</h2>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Describe yourself*</label>
+                                <input class="form-control" type="text" name="description" required class="form-control" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Skills*</label>
+                                <input class="form-control" type="text" name="skills" required class="form-control" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Tell us something amazing you built*</label>
+                                <input class="form-control" type="text" name="userBuild" class="form-control" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Where are you based?*</label>
+                                <input class="form-control" type="text" name="location" required class="form-control" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Links*</label>
+                                <div class="input-link">
+                                    <input class="form-control links" type="text" name="twitter" placeholder="Twitter">
+                                </div>
+                                <div class="input-link">
+                                    <input class="form-control links" type="text" required name="linkedin" placeholder="Linkedin">
+                                </div>
+                                <div class="input-link">
+                                    <input class="form-control links" type="text" name="facebook" placeholder="Facebook">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Skype ID*</label>
+                                <input class="form-control" type="text" name="skypeId" class="form-control" id="usr">
+                            </div>
+                            <div>
+                                <h2>Questions</h2>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr" >Name*</label>
+                                <input class="form-control" type="text" name="name" value="<%=user.name%>"id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Email*</label>
+                                <input class="form-control inputF" type="email" required name="email" value="<%=user.email%>" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Mobile*</label>
+                                <input class="form-control inputF" type="tel" name="mobile" class="form-control" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">What do you currently do?*</label><br>
+                                <label class="radio radioFont"><input class="inputF" name="designation"  type="radio" value="Student(+2)"> Student(+2)</label><br>
+                                <label class="radio"><input class="inputF" name="designation" type="radio"  value="Student(Undergrad)"> Student(Undergrad)</label><br>
+                                <label class="radio"><input class="inputF" name="designation" type="radio" value="Entrepreneur"> Entrepreneur</label><br>
+                                <label class="radio"><input class="inputF" name="designation" type="radio" value="Techie"> Techie</label><br>
+                                <label class="radio"><input class="inputF" name="designation" type="radio" value="Work at startup"> Work at startup</label><br>
+                                <label class="radio"><input class="inputF" name="designation" type="radio" value="Work at MNC"> Work at MNC</label><br>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Do you have background in coding?*</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="codingBackground" required value="None"> None</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="codingBackground" value="Basic"> Basic</label><br>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Your objective of joining our bootcamp*</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="Career change"> Career change</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="Adding a new skillset"> Adding a new skillset</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="I am entrepreneur looking to build a product"> I am entrepreneur looking to build a product</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="joiningObjective" value="Just a hobby"> Just a hobby</label><br>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Which batch are you looking to join?*</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="batchType" value="Full-time"> Full-time</label><br>
+                                <label class="radio"><input class="inputF" type="radio" name="batchType" value="Part-time"> Part-time</label><br>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">How did you hear about us?*</label><br>
+                                <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Search Engine"> Search Engine</label><br>
+                                <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Word-of-mouth"> Word-of-mouth</label><br>
+                                <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Just a hobby"> Just a hobby</label><br>
+                                <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Print/Online media"> Print/Online media</label><br>
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">What is your expectation from the program?*</label><br>
+                                <input class="form-control inputF" name="expectations" type="text" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Ask for new Recommendations?</label>
+                                <input class="form-control inputF" type="text" name="recommendation" class="form-control" id="usr">
+                            </div>
+                            <br>
+                            <br>
+                            <div style="text-align:center;">
+                                <p>Are you done? Connect now to finalize</p>
+                                <button class="btn btnf btn-primary btn-lg" type="submit">CONNECT NOW</button>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
 </div>
-
 <%- include partials/footer %>

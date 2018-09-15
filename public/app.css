@@ -1,6 +1,7 @@
 html, body{
     height: 100%;
     width: 100%;
+    font-family: 'Quicksand', sans-serif;
     background-color: rgb(241, 240, 240)
 }
 .logo{
@@ -14,10 +15,16 @@ html, body{
 .radioFont{
     font-size: 15px;
 }
-.formH{
-    width: 75%;
+.profile{
     margin: auto;
     padding-top: 1%;
+    text-align: center;
+}
+.profileImage{
+    border-radius: 50%;
+}
+.formH{
+    width: 80%;
 }
 .formB{
     background-color: white;
