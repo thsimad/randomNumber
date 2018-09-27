@@ -101,7 +101,13 @@ router.put('/form',isLogedIn, (req, res)=>{
                 from: '"The Hacking School" <app@thehackingschool.com>', // sender address
                 to: email, // list of receivers
                 subject: 'Application Received ', // Subject line
-                html: 'Hello <h1>'+name+'</h1> '
+                html: '<html><head></head><body><div><p>Hi [XYZ],\
+                Thank you for applying to the Full Stack Web Development. We appreciate your interest in joining The Hacking School - India’s First Coding Bootcamp.\
+                We would like to inform you that we have successfully received your application. Our admissions team is currently reviewing all the applications and you’ll be receiving a call from the program team within the next 48 hours.</p> \
+                \
+                <p>In any case, we will keep you posted on the status of your application.</p>\
+                <h6>Best Of Luck!</h6>\
+                <p>Program Team</p></div><body></html> '
                     
                 };
                 transporter.sendMail(mailOptions, function (err, info) {
