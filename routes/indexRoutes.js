@@ -111,7 +111,7 @@ router.put('/form',isLogedIn, (req, res)=>{
                 <p>Program Team - +917989062951</p>\
                 <p>The Hacking School</p></div>\
                 \
-                <div style="text-align: right;"><img src="https://i.imgur.com/EKxlhyS.png" style = "height: 75px; width: 100px;"></div><body></html> '
+                <div style="text-align: right; padding-right: 25px;"><img src="https://i.imgur.com/EKxlhyS.png" style = "height: 75px; width: 110px;"></div><body></html> '
                     
                 };
                 transporter.sendMail(mailOptions, function (err, info) {
