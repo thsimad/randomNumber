@@ -20,8 +20,13 @@ html, body{
     padding-top: 1%;
     text-align: center;
 }
+.prof{
+    float: right;
+}
 .profileImage{
     border-radius: 50%;
+    width: 125 px;
+    height: 125px;
 }
 .formH{
     width: 80%;
@@ -35,6 +40,10 @@ html, body{
 .formP{
     padding: 40px;
 }
+.facebook{
+    height: 45px;
+    width: 250px  
+}
 .input-link{
     padding-left: 30px;
     padding-bottom: 5px;
@@ -42,10 +51,40 @@ html, body{
 }
 .rg-from{
     font-size: 1.15em;
+    display: inline;
 }
 .linkedinb{
     height: 50px;
     width: 250px
+}
+.applicants{
+    padding-top: 3%;
+    width: 100%; 
+}
+.applicant{
+    padding: 25px;
+    background-color: white;
+    width: 100%; 
+}
+.applicantProfile{
+    padding: 25px;
+}
+.applicantLinks{
+    color: black;
+    font-size: 2em;
+    float: right;
+}
+.footer {
+    /* bottom: 0; */
+    height: 22px;
+    margin-bottom: 28px;
+    margin-top: 28px;
+    position: absolute;
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.068);
+    height: 70px;
 }
 @media(max-width: 600px){
     .formH{

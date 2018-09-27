@@ -19,7 +19,9 @@ const   express         = require('express'),
         port            = process.env.PORT || 3000,
         helmet          = require('helmet'),
         compression     = require('compression'),
-        mailPs          = require('./private/mailPs') 
+        fbkeys          = require('./private/facebookKey'),
+        mailPs          = require('./private/mailPs'),
+        FacebookStrategy= require('passport-facebook'),
         path            = require('path');
 //mlab connect
 // mongoose.connect('mongodb://localhost:27017/THS', {useNewUrlParser: true});
@@ -72,7 +74,6 @@ passport.use(new LinkedInStrategy({
     scope: ['r_emailaddress', 'r_basicprofile'],
     }, function(accessToken, refreshToken, profile, done) {
             let data = profile;
-            console.log(data);
             process.nextTick(function () {
                 User.findOne({linkedinId: profile.id}).then((currentUser) => {
                     if(currentUser){
@@ -97,6 +98,66 @@ passport.use(new LinkedInStrategy({
 
   //facebook oauth
   //Facebook Oauth Config.
+  passport.use(new FacebookStrategy({
+    clientID: fbkeys.appId,
+    clientSecret: fbkeys.appSecret,
+    callbackURL: "https://thehackingschool.herokuapp.com/register/facebook/redirect",
+    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified', 'accounts']
+    },
+    (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
+        console.log(profile._json.accounts);
+        var email;
+        if(profile.emails === undefined){
+            email = null;
+        }else{
+            email = profile.emails[0].value;
+        }
+        var firstName;
+        if(profile._json.first_name === undefined){
+            firstName = "";
+        }else{
+            firstName = profile._json.first_name;
+        } 
+        var lastName;
+        if(profile._json.last_name === undefined){
+            lastName = "";
+        }else{
+            lastName = profile._json.last_name;
+        }
+        var middleName;
+        if(profile._json.middle_name === undefined){
+            middleName = "";
+        }else{
+            middleName = profile._json.middle_name;
+        }
+        var fblink;
+        if(profile._json.link === undefined){
+            fblink = "";
+        }else{
+            fblink = profile._json.link;
+        }
+        User.findOne({facebookId: profile.id}).then((currentUser) => {
+            if(currentUser){
+                done(null, currentUser);
+            }else{
+                new User({ 
+                    facebookId: profile.id,
+                    name: firstName+" "+middleName+" "+lastName,
+                    email: email,
+                    fblink: fblink,
+                    accounts: profile._json.accounts,
+                    facebookProfileUrl: profile.profileUrl
+
+                }, function (err, user) {
+                return cb(err, user);
+                }).save().then((newUser)=>{
+                    done(null, newUser);        
+                });
+            }
+        })
+    }
+));
 //Passport Config.
 passport.serializeUser((user, done) => {
     done(null, user);

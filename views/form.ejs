@@ -20,44 +20,6 @@
                 <%- include partials/flash %>
                     <form action="/form?_method=PUT" method="post" class="border formB border-light">
                         <div class="formP">
-                            <div>
-                                <h2>A bit about you</h2>
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Describe yourself*</label>
-                                <input class="form-control" type="text" name="description" required class="form-control" id="usr">
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Skills*</label>
-                                <input class="form-control" type="text" name="skills" required class="form-control" id="usr">
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Tell us something amazing you built*</label>
-                                <input class="form-control" type="text" name="userBuild" class="form-control" id="usr">
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Where are you based?*</label>
-                                <input class="form-control" type="text" name="location" required class="form-control" id="usr">
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Links*</label>
-                                <div class="input-link">
-                                    <input class="form-control links" type="text" name="twitter" placeholder="Twitter">
-                                </div>
-                                <div class="input-link">
-                                    <input class="form-control links" type="text" required name="linkedin" placeholder="Linkedin">
-                                </div>
-                                <div class="input-link">
-                                    <input class="form-control links" type="text" name="facebook" placeholder="Facebook">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Skype ID*</label>
-                                <input class="form-control" type="text" name="skypeId" class="form-control" id="usr">
-                            </div>
-                            <div>
-                                <h2>Questions</h2>
-                            </div>
                             <div class="form-group">
                                 <label class="rg-from" for="usr" >Name*</label>
                                 <input class="form-control" type="text" name="name" value="<%=user.name%>"id="usr">
@@ -69,6 +31,10 @@
                             <div class="form-group">
                                 <label class="rg-from" for="usr">Mobile*</label>
                                 <input class="form-control inputF" type="tel" name="mobile" class="form-control" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Where do you stay?*</label>
+                                <input class="form-control inputF" type="text" name="location" class="form-control" id="usr">
                             </div>
                             <div class="form-group">
                                 <label class="rg-from" for="usr">What do you currently do?*</label><br>
@@ -100,7 +66,6 @@
                                 <label class="rg-from" for="usr">How did you hear about us?*</label><br>
                                 <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Search Engine"> Search Engine</label><br>
                                 <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Word-of-mouth"> Word-of-mouth</label><br>
-                                <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Just a hobby"> Just a hobby</label><br>
                                 <label class="radio"><input class="inputF" name="source" name="source" type="radio" value="Print/Online media"> Print/Online media</label><br>
                             </div>
                             <div class="form-group">
@@ -110,6 +75,11 @@
                             <div class="form-group">
                                 <label class="rg-from" for="usr">Ask for new Recommendations?</label>
                                 <input class="form-control inputF" type="text" name="recommendation" class="form-control" id="usr">
+                            </div>
+                            <div class="form-group">
+                                <label class="rg-from" for="usr">Need financial assistance?</label>
+                                <label class="radio"><input class="inputF" name="source" name="finassistance" type="radio" value="Yes"> Yes</label><br>
+                                <label class="radio"><input class="inputF" name="source" name="finassistance" type="radio" value="No"> No</label><br>
                             </div>
                             <br>
                             <br>

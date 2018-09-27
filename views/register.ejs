@@ -1,12 +1,22 @@
 <%- include partials/header %>
+<style>
+.footer{
+    bottom: 0;
+}
+</style>
 <div class="container">
     <div style="text-align:center; padding-top: 5%;" class="signup container">
     <%- include partials/flash %>        
         <%if(user){%>
            
         <%}else{%>
-            <h1 style="text-align:center; padding-top: 0.3%;" >Signup</h1><br>
-            <a style="text-align:center; height: 35%;"  href="/auth/linkedin"><img class="linkedinb" src="./linkedin.png" alt="signup with linkedIn"></a>
+        <h1 style="text-align:center; padding-top: 0.3%;" >Signup</h1><br>
+        <div style="text-align:center; padding-bottom: 25px;">
+            <a style="text-align:center;"  href="/auth/linkedin"><img class="linkedinb" src="./linkedin.png" alt="signup with linkedIn"></a>
+        </div>
+        <div>
+            <a  style="text-align:center;"   href='/register/facebook/redirect'><img class="facebook" src="./facebook.png" alt="Signup with facebook"></a>
+        </div>
         <%}%>
         
     </div>

@@ -4,11 +4,25 @@ var UserSchema = new mongoose.Schema({
 	registeredDate: {
         type: Date, default: Date.now
     },
+    role:{
+        type: String,
+        default: 'student'
+    },
+    applied:{
+        type: Boolean,
+        default: false
+    },
 	name: String,
 	linkedinId: {
-     type: String,
-     required: true
+     type: String   
     },
+    facebookId:{
+        type: String
+    },
+    fblink:{
+        type: String
+    },
+    
     skills:{
         type:String
     },
@@ -66,10 +80,19 @@ var UserSchema = new mongoose.Schema({
     source:{
         type: String
     },
+    location:{
+        type: String
+    },
     expectations:{
         type: String
     },
     recommendation:{
+        type: String
+    },
+    refEmail: {
+        type: String
+    },
+    finassistance:{
         type: String
     }
 });
