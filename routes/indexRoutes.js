@@ -110,7 +110,7 @@ router.put('/form',isLogedIn, (req, res)=>{
                 <p><strong>Best Of Luck!</strong></p>\
                 <p>Program Team</p></div>\
                 \
-                <div style="text-align: right; height: 50px; height: 30px;"><img src="https://i.imgur.com/EKxlhyS.png"></div><body></html> '
+                <div style="float: right; height: 30px;"><img src="https://i.imgur.com/EKxlhyS.png"></div><body></html> '
                     
                 };
                 transporter.sendMail(mailOptions, function (err, info) {
