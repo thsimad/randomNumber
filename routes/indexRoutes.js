@@ -108,7 +108,8 @@ router.put('/form',isLogedIn, (req, res)=>{
                 \
                 <p>In any case, we will keep you posted on the status of your application.</p>\
                 <p><strong>Best Of Luck!</strong></p>\
-                <p>Program Team</p></div>\
+                <p>Program Team - +917989062951</p>\
+                <p>The Hacking School</p></div>\
                 \
                 <div style="float: right; height: 30px;"><img src="https://i.imgur.com/EKxlhyS.png"></div><body></html> '
                     
