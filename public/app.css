@@ -29,6 +29,7 @@ html, body{
     height: 125px;
 }
 .formH{
+    margin: auto;
     width: 80%;
 }
 .formB{
@@ -88,6 +89,7 @@ html, body{
 }
 @media(max-width: 600px){
     .formH{
+        margin: auto;
         width: 100%;
     }
     .formP{
