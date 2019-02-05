@@ -101,7 +101,7 @@ passport.use(new LinkedInStrategy({
   passport.use(new FacebookStrategy({
     clientID: fbkeys.appId,
     clientSecret: fbkeys.appSecret,
-    callbackURL: "https://thehackingschool.herokuapp.com/register/facebook/redirect",
+    callbackURL: "http://schoolofcoding.in/register/facebook/redirect",
     profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified', 'accounts']
     },
     (accessToken, refreshToken, profile, done) => {

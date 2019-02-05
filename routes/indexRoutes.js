@@ -17,6 +17,9 @@ let transporter = nodemailer.createTransport({
             pass: mailPs.password
         }
 });
+router.get('/', (req, res)=>{
+    res.redirect('/register')
+})
 router.get('/home', isLogedIn, (req, res)=>{
     if(req.user.designation === undefined){
         req.flash('error', 'Please add your details first.');
