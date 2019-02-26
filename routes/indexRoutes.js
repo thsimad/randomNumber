@@ -18,7 +18,11 @@ let transporter = nodemailer.createTransport({
         }
 });
 router.get('/', (req, res)=>{
-    res.redirect('/register')
+    if(!req.user){
+        res.redirect('/register')
+    }else{
+        res.redirect('/form')
+    }
 })
 router.get('/home', isLogedIn, (req, res)=>{
     if(req.user.designation === undefined){
