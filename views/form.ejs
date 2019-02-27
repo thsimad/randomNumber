@@ -1,6 +1,6 @@
 <%- include partials/header %>
 <div class="row" style="padding-top: 3%;">
-    <div class="col-lg-3">
+    <div class="col-lg-3 container">
         <%if(user){%>
             <div class="profile">
                 <%if(user.linkedinProfileUrl === undefined){%>
@@ -15,7 +15,7 @@
         <%}%>
     </div>
     <div class="col-lg-9">
-        <div class="container">
+        <div class="">
             <div class="formH">
                 <%- include partials/flash %>
                     <form action="/form?_method=PUT" method="post" class="border formB border-light">

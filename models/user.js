@@ -16,7 +16,10 @@ var UserSchema = new mongoose.Schema({
 	linkedinId: {
      type: String   
     },
-    facebookId:{
+    // facebookId:{
+    //     type: String
+    // },
+    googleId:{
         type: String
     },
     fblink:{

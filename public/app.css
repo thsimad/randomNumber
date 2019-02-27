@@ -19,9 +19,10 @@ html, body{
     font-size: 15px;
 }
 .profile{
-    margin: auto;
+    /* margin: auto; */
     padding-top: 1%;
     text-align: center;
+    padding-left: 70px;
 }
 .prof{
     float: right;
@@ -44,8 +45,7 @@ html, body{
 .formP{
     padding: 40px;
 }
-.facebook{
-    height: 41px;
+.google{
     width: 247px;
 }
 .input-link{
@@ -58,7 +58,6 @@ html, body{
     display: inline;
 }
 .linkedinb{
-    height: 50px;
     width: 250px
 }
 .applicants{

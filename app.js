@@ -7,6 +7,7 @@ const   express         = require('express'),
         passport        = require('passport'),
         flash           = require('connect-flash'),
         LinkedInStrategy= require('passport-linkedin-oauth2').Strategy,
+        googleStrategy          = require('passport-google-oauth20'),
         mongooseKey     = require('./private/mongooseKey'),
         methodOverride  = require('method-override'),
         nodemailer      = require('nodemailer'),
@@ -15,11 +16,12 @@ const   express         = require('express'),
         User            = require('./models/user'),
         secCode         = require('./private/expressCode'),
         isLogedIn       = require('./private/isLogedIn'),
-        linkedinKey     = require('./private/linkedinKey')
+        linkedinKey     = require('./private/linkedinKey'),
+        googleKeys      = require('./private/googleKeys'),
         port            = process.env.PORT || 3000,
         helmet          = require('helmet'),
         compression     = require('compression'),
-        fbkeys          = require('./private/facebookKey'),
+        // fbkeys          = require('./private/facebookKey'),
         mailPs          = require('./private/mailPs'),
         FacebookStrategy= require('passport-facebook'),
         path            = require('path');
@@ -98,66 +100,91 @@ passport.use(new LinkedInStrategy({
 
   //facebook oauth
   //Facebook Oauth Config.
-  passport.use(new FacebookStrategy({
-    clientID: fbkeys.appId,
-    clientSecret: fbkeys.appSecret,
-    callbackURL: "http://schoolofcoding.in/register/facebook/redirect",
-    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified', 'accounts']
-    },
-    (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        console.log(profile._json.accounts);
-        var email;
-        if(profile.emails === undefined){
-            email = null;
-        }else{
-            email = profile.emails[0].value;
-        }
-        var firstName;
-        if(profile._json.first_name === undefined){
-            firstName = "";
-        }else{
-            firstName = profile._json.first_name;
-        } 
-        var lastName;
-        if(profile._json.last_name === undefined){
-            lastName = "";
-        }else{
-            lastName = profile._json.last_name;
-        }
-        var middleName;
-        if(profile._json.middle_name === undefined){
-            middleName = "";
-        }else{
-            middleName = profile._json.middle_name;
-        }
-        var fblink;
-        if(profile._json.link === undefined){
-            fblink = "";
-        }else{
-            fblink = profile._json.link;
-        }
-        User.findOne({facebookId: profile.id}).then((currentUser) => {
+//   passport.use(new FacebookStrategy({
+//     clientID: fbkeys.appId,
+//     clientSecret: fbkeys.appSecret,
+//     callbackURL: "http://schoolofcoding.in/register/facebook/redirect",
+//     profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified', 'accounts']
+//     },
+//     (accessToken, refreshToken, profile, done) => {
+//         console.log(profile);
+//         console.log(profile._json.accounts);
+//         var email;
+//         if(profile.emails === undefined){
+//             email = null;
+//         }else{
+//             email = profile.emails[0].value;
+//         }
+//         var firstName;
+//         if(profile._json.first_name === undefined){
+//             firstName = "";
+//         }else{
+//             firstName = profile._json.first_name;
+//         } 
+//         var lastName;
+//         if(profile._json.last_name === undefined){
+//             lastName = "";
+//         }else{
+//             lastName = profile._json.last_name;
+//         }
+//         var middleName;
+//         if(profile._json.middle_name === undefined){
+//             middleName = "";
+//         }else{
+//             middleName = profile._json.middle_name;
+//         }
+//         var fblink;
+//         if(profile._json.link === undefined){
+//             fblink = "";
+//         }else{
+//             fblink = profile._json.link;
+//         }
+//         User.findOne({facebookId: profile.id}).then((currentUser) => {
+//             if(currentUser){
+//                 done(null, currentUser);
+//             }else{
+//                 new User({ 
+//                     facebookId: profile.id,
+//                     name: firstName+" "+middleName+" "+lastName,
+//                     email: email,
+//                     fblink: fblink,
+//                     accounts: profile._json.accounts,
+//                     facebookProfileUrl: profile.profileUrl
+
+//                 }, function (err, user) {
+//                 return cb(err, user);
+//                 }).save().then((newUser)=>{
+//                     done(null, newUser);        
+//                 });
+//             }
+//         })
+//     }
+// ));
+passport.use(
+    new googleStrategy({
+        callbackURL: googleKeys.redirectUrl,
+        clientID: googleKeys.clientId,
+        clientSecret: googleKeys.clientSecret
+    }, (accessToken, refreshToken, profile, done) => {
+        console.log(profile)
+        User.findOne({googleId: profile.id}).then((currentUser) => {
             if(currentUser){
                 done(null, currentUser);
             }else{
                 new User({ 
-                    facebookId: profile.id,
-                    name: firstName+" "+middleName+" "+lastName,
-                    email: email,
-                    fblink: fblink,
-                    accounts: profile._json.accounts,
-                    facebookProfileUrl: profile.profileUrl
-
+                    googleId: profile.id,
+                    name: profile.displayName,
+                    email: profile.emails[0].value
                 }, function (err, user) {
-                return cb(err, user);
+                  return cb(err, user);
                 }).save().then((newUser)=>{
-                    done(null, newUser);        
+                    done(null, newUser);   
                 });
             }
         })
-    }
+      }
 ));
+
 //Passport Config.
 passport.serializeUser((user, done) => {
     done(null, user);
