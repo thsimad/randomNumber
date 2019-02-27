@@ -56,7 +56,7 @@ router.put('/form',isLogedIn, (req, res)=>{
     let name        = req.body.name,
         email       = req.body.email.toLowerCase(),
         mobile      = req.body.mobile,
-        objective = req.body.joiningObjective;
+        objective = req.body.objective;
         console.log(req.body);
     User.findByIdAndUpdate(req.user._id, {
                                             applied: true,
