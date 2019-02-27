@@ -52,15 +52,7 @@ router.put('/form',isLogedIn, (req, res)=>{
     let name        = req.body.name,
         email       = req.body.email.toLowerCase(),
         mobile      = req.body.mobile,
-        location    = req.body.location,
-        designation = req.body.designation,
-        codingBackground = req.body.codingBackground,
-        joiningObjective = req.body.joiningObjective,
-        batchType        = req.body.batchType,
-        source           = req.body.source,
-        expectations     = req.body.expectations,
-        recommendation   = req.body.recommendation,
-        finassistance         = req.body.finassistance;
+        objective = req.body.joiningObjective;
         console.log(req.body);
     User.findByIdAndUpdate(req.user._id, {
                                             applied: true,
