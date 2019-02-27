@@ -1,5 +1,5 @@
 const   mongooseKey = {
-    url: process.env.MONGODB_URI || 'mongodb://imadahmad:123456a@ds147592.mlab.com:47592/ths'
+    url: process.env.MONGODB_URI || 'mongodb://imadahmed:123456A@ds155045.mlab.com:55045/schoolofcoding'
 }
 
 module.exports = mongooseKey;

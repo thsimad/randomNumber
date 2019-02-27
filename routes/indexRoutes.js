@@ -67,15 +67,8 @@ router.put('/form',isLogedIn, (req, res)=>{
                                             name:name, 
                                             email:email, 
                                             mobile:mobile, 
-                                            location: location,
-                                            designation:designation, 
-                                            codingBackground:codingBackground, 
-                                            joiningObjective:joiningObjective, 
-                                            batchType:batchType, 
-                                            source:source, 
-                                            expectations: expectations,
-                                            recommendation:recommendation,
-                                            finassistance: finassistance}, (err, data)=>{
+                                            joiningObjective:objective
+                                        }, (err, data)=>{
         if(err){
             console.log(err);
             req.flash('error', 'Something went wrong, please try again later!');
@@ -89,10 +82,10 @@ router.put('/form',isLogedIn, (req, res)=>{
                         console.log(admin.email);
                         let mail = admin.email;
                         mailOptions = {
-                            from: '"The Hacking School" <app@thehackingschool.com>', // sender address
+                            from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
                             to: mail, // list of receivers
                             subject: 'New application received from '+data.name, // Subject line
-                            html: ' <h1>'+name+'</h1></p> <h3>1. Name:</h3> <p>'+name+'</p> <h3>2. Email:</h3><p>'+email+'</p><h3>3. Mobile:</h3><p>'+mobile+'</p> <h3>4. What do you currently do?</h3><p>'+designation+'</p><h3>5. Do you have background in coding?</h3><p>'+codingBackground+'</p><h3>6. Your objective of joining our bootcamp Career</h3><p>'+joiningObjective+'</p><h3>7. Which batch are you looking to join?</h3><p>'+batchType+'</p> <h3>8. How did you hear about us?</h3><p>'+source+'</p> <h3>9. What is your expectation from the program?</h3><p>'+expectations+'</p>'
+                            html: ' <h1>'+name+'</h1></p> <h3>1. Name:</h3> <p>'+name+'</p> <h3>2. Email:</h3><p>'+email+'</p><h3>3. Mobile:</h3><p>'+mobile+'</p> <h3>4. Why do you want to join this program?</h3><p>'+objective+'</p>'
                                 
                             };
                             transporter.sendMail(mailOptions, function (err, info) {
@@ -105,7 +98,7 @@ router.put('/form',isLogedIn, (req, res)=>{
                 }
             });
             mailOptions = {
-                from: '"School Of Coding" <app@thehackingschool.com>', // sender address
+                from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
                 to: email, // list of receivers
                 subject: 'Application Received ', // Subject line
                 html: '<html><head></head><body><div><p>Hi <strong>'+ name +'</strong>,<br><br>\
