@@ -42,7 +42,7 @@ router.get('/register', (req, res)=>{
 });
 router.get('/form', isLogedIn, (req, res)=>{
     if(req.user.role === 'admin'){
-        res.redirect('/')
+        res.redirect('/admin')
     }else{
         if(req.user.applied === false){
             res.render('form');        
