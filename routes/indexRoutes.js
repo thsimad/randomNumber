@@ -41,11 +41,15 @@ router.get('/register', (req, res)=>{
     }
 });
 router.get('/form', isLogedIn, (req, res)=>{
-    if(req.user.applied === false){
-        res.render('form');        
+    if(req.user.role === 'admin'){
+        res.redirect('/')
     }else{
-        req.flash('error', 'You have already submitted your request.');
-        res.redirect('/home')
+        if(req.user.applied === false){
+            res.render('form');        
+        }else{
+            req.flash('error', 'You have already submitted your request.');
+            res.redirect('/home')
+        }
     }
 });
 router.put('/form',isLogedIn, (req, res)=>{
@@ -59,8 +63,7 @@ router.put('/form',isLogedIn, (req, res)=>{
                                             name:name, 
                                             email:email, 
                                             mobile:mobile, 
-                                            joiningObjective:objective,
-                                            applied: true
+                                            joiningObjective:objective
                                         }, (err, data)=>{
         if(err){
             console.log(err);
@@ -120,7 +123,7 @@ router.put('/form',isLogedIn, (req, res)=>{
     });
 });
 router.get('/success', isLogedIn, (req, res)=>{
-    if(req.user.designation === undefined){
+    if(req.user.applied === false){
         req.flash('error', 'Please add your details first.');
         res.redirect('/form')
     }else{
