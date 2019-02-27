@@ -105,20 +105,20 @@ router.put('/form',isLogedIn, (req, res)=>{
                 }
             });
             mailOptions = {
-                from: '"The Hacking School" <app@thehackingschool.com>', // sender address
+                from: '"School Of Coding" <app@thehackingschool.com>', // sender address
                 to: email, // list of receivers
                 subject: 'Application Received ', // Subject line
                 html: '<html><head></head><body><div><p>Hi <strong>'+ name +'</strong>,<br><br>\
-                Thank you for applying to the Full Stack Web Development. We appreciate your interest in joining <strong><i>The Hacking School - India’s First Coding Bootcamp.</i></strong><br>\
+                Thank you for applying to the Full Stack Web Development. We appreciate your interest in joining <strong><i>School Of Coding - A pre-bootcamp to help you get started.</i></strong><br>\
                 <br>\
                 We would like to inform you that we have successfully received your application. Our admissions team is currently reviewing all the applications and you’ll be receiving a call from the program team within the next 48 hours.</p> \
                 \
                 <p>In any case, we will keep you posted on the status of your application.</p>\
                 <p><strong>Best Of Luck!</strong></p>\
-                <p>Program Team - +917989062951</p>\
-                <p>The Hacking School</p></div>\
+                <p>Program Team - +91 9959682957</p>\
+                <p>School Of Coding</p></div>\
                 \
-                <div style="text-align: right; padding-right: 25px;"><a href="https://www.thehackingschool.com"><img src="https://i.imgur.com/EKxlhyS.png" style = "height: 75px; width: 110px;"></a></div><body></html> '
+                <div style="text-align: right; padding-right: 25px;"><a href="https://www.schoolofcoding.in"><img src="https://i.imgur.com/ICWk8Qf.png" style = "height: 75px; width: 110px;"></a></div><body></html> '
                     
                 };
                 transporter.sendMail(mailOptions, function (err, info) {

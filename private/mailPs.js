@@ -1,5 +1,5 @@
 const mail = {
-    email: 'app@thehackingschool.com',
+    email: 'info@schoolofcoding.in',
     password: 'MerajFaheem123'
 }
 

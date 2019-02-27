@@ -1,6 +1,6 @@
 $(window).on('load', function(){
     console.log('Ready')
     setTimeout(function(){ 
-        window.location.replace("https://www.thehackingschool.com/");
+        window.location.replace("https://schoolofcoding.in/");
      }, 3000);
 });
