@@ -20,6 +20,7 @@ const   express         = require('express'),
         googleKeys      = require('./private/googleKeys'),
         port            = process.env.PORT || 3000,
         helmet          = require('helmet'),
+        multer = require('multer')
         compression     = require('compression'),
         // fbkeys          = require('./private/facebookKey'),
         mailPs          = require('./private/mailPs'),

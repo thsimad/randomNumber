@@ -7,7 +7,7 @@
 <div class="container">
     <div class="applicants">
         <%data.forEach((applicant)=>{%>
-            <%if(applicant.applied === true){%>
+            <%if(applicant.applied === true && applicant.role !== "admin"){%>
                 <div class="applicant">
                     <div class="applicantProfile">
                             <div class="row">

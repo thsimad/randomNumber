@@ -51,10 +51,10 @@ var UserSchema = new mongoose.Schema({
     skills:{
         type: String
     },
-    userBuild:{
+    ideas:{
         type: String
     },
-    skypeId:{
+    inspiredBy:{
         type: String
     },
     links:{

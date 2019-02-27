@@ -40,6 +40,7 @@ html, body{
     background-color: white;
 }
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    color: white;
     background-color: rgb(113, 179, 105);
 }
 .formP{
@@ -100,4 +101,28 @@ html, body{
     .btnf{
     width: 100%;
     }
+}
+
+/* form */
+
+#form2{
+    display: none;
+}
+
+#form3{
+    display: none
+}
+.backArrow{
+    font-size: 2em;
+    position: absolute;
+}
+.width70{
+    width: 80%;
+    margin: 0 auto;
+}
+#back2{
+    cursor: pointer;
+}
+#back3{
+    cursor: pointer;
 }

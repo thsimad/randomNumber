@@ -16,6 +16,8 @@
                         <img class="profileImage" src="<%=data.linkedinProfileUrl%>" onerror=this.src="https://i.imgur.com/V0ZBBeO.png" alt="<%=data.name%>">
                         <h4><%=data.name%></h4>
                         <h6><%=data.linkedinHeadline%></h6>
+                        <br>
+                        <a href="/download/<%=data._id%>">Download Resume</a>
                     </div>
                 <%}else{%>
                 <%}%>
@@ -33,40 +35,20 @@
                 
             </div>
             <div class="form-group">
-                <label class="rg-from" for="usr">Where do you stay?*</label>
-                <h4><%=data.location%></h4>
-            </div>
-            <div class="form-group">
-                <label class="rg-from" for="usr">What do you currently do?*</label>
-                <h4><%=data.designation%></h4>                
-            </div>
-            <div class="form-group">
-                <label class="rg-from" for="usr">Do you have background in coding?*</label>
-                <h4><%=data.codingBackground%></h4>                
-            </div>
-            <div class="form-group">
-                <label class="rg-from" for="usr">Your objective of joining our bootcamp*</label>
+                <label class="rg-from" for="usr">Why do you want to join this program?*</label>
                 <h4><%=data.joiningObjective%></h4>
             </div>
             <div class="form-group">
-                <label class="rg-from" for="usr">Which batch are you looking to join?*</label>
-                <h4><%=data.batchType%></h4>
+                <label class="rg-from" for="usr">Who inspired you the most and why?*</label>
+                <h4><%=data.inspiredBy%></h4>                
+            </div>
+            <div class="form-group">
+                <label class="rg-from" for="usr">Do you have a project in your mind?</label>
+                <h4><%=data.ideas%></h4>                
             </div>
             <div class="form-group">
                 <label class="rg-from" for="usr">How did you hear about us?*</label>
                 <h4><%=data.source%></h4>
-            </div>
-            <div class="form-group">
-                <label class="rg-from" for="usr">What is your expectation from the program?*</label>
-                <h4><%=data.expectations%></h4>
-            </div>
-            <div class="form-group">
-                <label class="rg-from" for="usr">Ask for new Recommendations?</label>
-                <h4><%=data.recommendation%></h4>      
-            </div>
-            <div class="form-group">
-                <label class="rg-from" for="usr">Need financial assistance?</label>
-                <h4><%=data.finassistance%></h4>
             </div>
         </div>
     </div>

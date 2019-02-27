@@ -2,15 +2,15 @@
 <div class="row" style="padding-top: 3%;">
     <div class="col-lg-3 container">
         <%if(user){%>
-            <div class="profile">
-                <%if(user.linkedinProfileUrl === undefined){%>
-                    <img class="profileImage" src="https://i.imgur.com/V0ZBBeO.png" alt="<%=user.name%>">
-                <%}else{%>
-                    <img class="profileImage" src="<%=user.linkedinProfileUrl%>" alt="<%=user.name%>">
-                <%}%>
+        <div class="profile">
+            <%if(user.linkedinProfileUrl === undefined){%>
+            <img class="profileImage" src="https://i.imgur.com/V0ZBBeO.png" alt="<%=user.name%>">
+            <%}else{%>
+            <img class="profileImage" src="<%=user.linkedinProfileUrl%>" alt="<%=user.name%>">
+            <%}%>
                 <h4><%=user.name%></h4>
-                <h6><%=user.linkedinHeadline%></h6>
-            </div>
+            <h6><%=user.linkedinHeadline%></h6>
+        </div>
         <%}else{%>
         <%}%>
     </div>
@@ -18,35 +18,88 @@
         <div class="">
             <div class="formH">
                 <%- include partials/flash %>
-                    <form action="/form?_method=PUT" method="post" class="border formB border-light">
-                        <div class="formP">
-                            <div class="form-group">
-                                <label class="rg-from" for="usr" >Name*</label>
-                                <input class="form-control" type="text" required name="name" value="<%=user.name%>"id="usr">
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Email*</label>
-                                <input class="form-control inputF" type="email" required name="email" value="<%=user.email%>" id="usr">
-                            </div>
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Mobile*</label>
-                                <input class="form-control inputF" type="tel" required name="mobile" class="form-control" id="usr">
-                            </div>
-                           
-                            <div class="form-group">
-                                <label class="rg-from" for="usr">Why do you want to join this program?</label>
-                                <input class="form-control inputF" type="text" required name="objective" class="form-control" id="usr">
-                            </div>
-                            <br>
-                            <br>
-                            <div style="text-align:center;">
-                                <p>Are you done? Submit to finalize</p>
-                                <button class="btn btnf btn-primary btn-lg" type="submit">SUBMIT</button>
-                            </div>
-                        </div>
-                    </form>
+        <form action="/form?_method=PUT" enctype="multipart/form-data" method="post" class="border formB border-light">
+            <div class="formP">
+                <div id="form1">
+                    <div class="form-group width70">
+                        <label class="rg-from" for="usr">Name*</label>
+                        <input class="form-control" type="text" name="name" value="<%=user.name%>" id="usr">
+                    </div>
+                    <br>
+                    <div class="form-group width70">
+                        <label class="rg-from" for="usr">Email*</label>
+                        <input class="form-control inputF" type="email" name="email" value="<%=user.email%>"
+                            id="usr">
+                    </div>
+                    <br>
+                    <div class="form-group width70">
+                        <label class="rg-from" for="usr">Mobile*</label>
+                        <input class="form-control inputF" type="tel" name="mobile" class="form-control"
+                            id="usr">
+                    </div>
+                    <br>
+                    <div class="form-group width70">
+                        <label for="exampleFormControlFile1">Upload your resume</label>
+                        <input type="file" name="resume"  class="form-control-file"
+                            id="exampleFormControlFile1">
+                    </div>
+                    <br>
+                    <div style="text-align:center;">
+                        <a id="next" class="btn btnf btn-primary btn-lg">Next</a>
+                    </div>
+                </div>
+                <div id="form2">
+                    <div class="backArrow"><a id="back2"><i class="fas fa-chevron-left"></i></a></div><br>
+                    <div class="form-group width70">
+                        <label class="rg-from" for="usr">Why do you want to join this program?*</label>
+                        <textarea class="form-control inputF" type="text" name="objective" class="form-control"
+                            id="usr" rows="3"></textarea>
+                    </div>
+                    <br>
+                    <div class="form-group width70">
+                        <label class="rg-from" for="usr">Who inspired you the most and why?*</label>
+                        <textarea class="form-control inputF" type="text" name="inspiredBy"
+                            class="form-control" id="usr" rows="3"></textarea>
+                    </div>
+                    <br>
+                    <div style="text-align:center;">
+                        <a id="next1" class="btn btnf btn-primary btn-lg">Next</a>
+                    </div>
+                </div>
+                <div id="form3">
+                    <div class="backArrow"><a id="back3"><i class="fas fa-chevron-left"></i></a></div><br>
+                    <div class="form-group width70">
+                        <label class="rg-from" for="usr">Do you have a project in your mind?<br> Tell us about
+                            it.</label>
+                        <textarea class="form-control inputF" type="text" name="ideas"
+                            class="form-control" id="usr" rows="3"></textarea>
+                    </div>
+                    <br>
+                    <div class="form-group width70">
+                        <label class="rg-from" for="usr">How did you hear about us?*</label><br>
+                        <label class="radio"><input class="inputF" name="source" name="source" type="radio"
+                                value="Search Engine"> Search Engine</label><br>
+                        <label class="radio"><input class="inputF" name="source" name="source" type="radio"
+                                value="Word-of-mouth"> Word-of-mouth</label><br>
+                        <label class="radio"><input class="inputF" name="source" name="source" type="radio"
+                                value="Print/Online media"> Print/Online media</label><br>
+                    </div>
+                    <br>
+                    <div style="text-align:center;">
+                        <p>Are you done? Submit to finalize</p>
+                        <button id="next" class="btn btnf btn-primary btn-lg" type="submit">Submit</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+</div>
+</div>
+
+<style>
+    .footer {
+        bottom: 0;
+    }
+</style>
 <%- include partials/footer %>
