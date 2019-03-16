@@ -43,7 +43,7 @@ const storage = multer.diskStorage({ // notice you are calling the multer.diskSt
   
   function checkFileType(file, cb) {
     //Allow ext
-    const filetypes = /pdf/;
+    const filetypes = /pdf|doc|docx/;
     //check ext
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     //check mime
@@ -51,7 +51,7 @@ const storage = multer.diskStorage({ // notice you are calling the multer.diskSt
     if (mimetype && extname) {
       return cb(null, true);
     } else {
-      cb('Error: Pdf Only!');
+      cb('Error: Please upload your resume in pdf/doc/docx format only!');
     }
   }
 
@@ -97,7 +97,9 @@ router.put('/form', isLogedIn, (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             console.log(err)
-            res.render('index', { msg: err })
+            req.flash("error", err)
+            res.redirect('/form')
+            // res.render('index', { msg: err })
         } else {
             if (req.file == undefined) {
                 req.flash('error', 'Please upload your resume in pdf.')
@@ -124,7 +126,7 @@ router.put('/form', isLogedIn, (req, res) => {
                 }, (err, data) => {
                     if (err) {
                         console.log(err);
-                        req.flash('error', 'Something went wrong, please try again later!');
+                        req.flash('error', err);
                         res.redirect('/form')
                     } else {
                         console.log(data);
