@@ -20,6 +20,20 @@ let transporter = nodemailer.createTransport({
     }
 });
 
+const errorMail = (err) => {
+    mailOptions = {
+        from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
+        to: "imad@thehackingschool.com", // list of receivers
+        subject: 'Error Occured', // Subject line
+        html:   err };
+    transporter.sendMail(mailOptions, function (err, info) {
+        if (err)
+            console.log(err)
+        else
+            console.log(info);
+    });
+}
+
 const storage = multer.diskStorage({ // notice you are calling the multer.diskStorage() method here, not multer()
     destination: function (req, file, cb) {
       cb(null, __dirname + '/../uploads')
@@ -97,12 +111,13 @@ router.put('/form', isLogedIn, (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             console.log(err)
+            errorMail(err)
             req.flash("error", err)
             res.redirect('/form')
             // res.render('index', { msg: err })
         } else {
             if (req.file == undefined) {
-                req.flash('error', 'Please upload your resume in pdf.')
+                req.flash('error', 'Please upload your resume.')
                 res.redirect('/form')
             } else {
                 let name = req.body.name,
@@ -126,6 +141,7 @@ router.put('/form', isLogedIn, (req, res) => {
                 }, (err, data) => {
                     if (err) {
                         console.log(err);
+                        errorMail(err)            
                         req.flash('error', err);
                         res.redirect('/form')
                     } else {
@@ -196,6 +212,7 @@ router.get('/admin', isLogedIn, (req, res) => {
         User.find({}, (err, data) => {
             if (err) {
                 console.log(err)
+                errorMail(err)
                 req.flash('error', 'Something went wrong. Please try again later.');
                 res.redirect('/home')
             } else {
@@ -212,6 +229,7 @@ router.get('/applicantProfile-:id', isLogedIn, (req, res) => {
         User.findById(req.params.id, (err, data) => {
             if (err) {
                 console.log(err);
+                errorMail(err)           
                 req.flash('error', 'Something went wrong please try again later!');
                 res.redirect('/admin');
             } else {
@@ -225,6 +243,21 @@ router.get('/applicantProfile-:id', isLogedIn, (req, res) => {
 
 router.get('/download/:id', isLogedIn, (req, res) => {
     res.download(__dirname + '/../uploads/resume-' + req.params.id + '.pdf')
-  })  
+  }) 
+  
+router.get('/admin/allusers', isLogedIn, (req, res)=>{
+    if(req.user.role === 'admin'){
+        User.find()
+        .then((users)=>{
+            res.render('allUsers', {users})
+        })
+        .catch((err)=>{
+            console.log(err)
+            errorMail(err)
+            req.flash('error', ("Something went wrong, Please try again later"))
+            res.redirect('/admin')
+        })
+    }
+})
 
 module.exports = router
