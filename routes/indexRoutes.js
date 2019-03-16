@@ -83,12 +83,12 @@ router.get('/home', isLogedIn, (req, res) => {
         req.flash('error', 'Please add your details first.');
         res.redirect('/form')
     } else {
-        res.render('home');
+        res.render('home', {title: "School of coding -Home"});
     }
 });
 router.get('/register', (req, res) => {
     if (!req.user) {
-        res.render('register');
+        res.render('register',{title: "School of coding -Login or register"});
     } else {
         req.flash('success', ' ')
         res.redirect('/success')
@@ -99,7 +99,7 @@ router.get('/form', isLogedIn, (req, res) => {
         res.redirect('/admin')
     } else {
         if (req.user.applied === false) {
-            res.render('form');
+            res.render('form', {title: "School of coding -Application Form"});
         } else {
             req.flash('error', 'You have already submitted your request.');
             res.redirect('/home')
@@ -204,7 +204,7 @@ router.get('/success', isLogedIn, (req, res) => {
         req.flash('error', 'Please add your details first.');
         res.redirect('/form')
     } else {
-        res.render('success');
+        res.render('success',{title: "School of coding -Successfully applied"});
     }
 });
 router.get('/admin', isLogedIn, (req, res) => {
@@ -217,7 +217,7 @@ router.get('/admin', isLogedIn, (req, res) => {
                 res.redirect('/home')
             } else {
                 console.log(data);
-                res.render('admin', { data: data });
+                res.render('admin', { data: data, title: "School of coding -Admin" });
             }
         })
     } else {
@@ -233,7 +233,7 @@ router.get('/applicantProfile-:id', isLogedIn, (req, res) => {
                 req.flash('error', 'Something went wrong please try again later!');
                 res.redirect('/admin');
             } else {
-                res.render('applicantDetails', { data: data });
+                res.render('applicantDetails', { data: data, title: "School of coding -Users details" });
             }
         })
     } else {
@@ -249,7 +249,7 @@ router.get('/admin/allusers', isLogedIn, (req, res)=>{
     if(req.user.role === 'admin'){
         User.find()
         .then((users)=>{
-            res.render('allUsers', {users})
+            res.render('allUsers', {users, title: "School of coding -All Users"})
         })
         .catch((err)=>{
             console.log(err)

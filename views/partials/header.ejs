@@ -4,24 +4,29 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>School Of Coding -Application Form</title>
+        <title><%=title%></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./bootstrap.min.css">
+        <link rel="stylesheet" href="/bootstrap.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-        <link rel="stylesheet" href="./app.css">
+        <link rel="stylesheet" href="/app.css">
     </head>
 
     <body>
         <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light">
             <div class="navpadding">
-                <a class="navbar-brand" href="/"><img class="logo" src="./schoolofcoding.png"></a>
+                <a class="navbar-brand" href="/"><img class="logo" src="/schoolofcoding.png"></a>
             </div>
             <%if(user){%>
             <ul class="navbar-nav ml-auto desktop-links">
                 <%if(user.role === "admin"){%>
-                    <a class="nav-link ml-auto desktop-links" style="color: black;" href="/admin/allusers">All Users<span data-toggle="tooltip" data-placement="bottom"
-                        title="Logout"></span></a>    
+                    <%if(title === "School of coding -All Users"){%>
+                        <a class="nav-link ml-auto desktop-links" style="color: black;" href="/admin">Applied Users<span data-toggle="tooltip" data-placement="bottom"
+                            title="Logout"></span></a>
+                    <%}else{%>
+                        <a class="nav-link ml-auto desktop-links" style="color: black;" href="/admin/allusers">All Users<span data-toggle="tooltip" data-placement="bottom"
+                            title="Logout"></span></a>
+                    <%}%>    
                 <%}%>
                 <a class="nav-link ml-auto desktop-links" style="color: black;" href="/logout"><i
                         class="fas fa-sign-out-alt"></i><span data-toggle="tooltip" data-placement="bottom"
