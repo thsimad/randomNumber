@@ -101,6 +101,21 @@ html, body{
     .btnf{
     width: 100%;
     }
+    .h1{
+        font-size: 1.5rem;
+    }
+    .h4{
+        font-size: 1rem;
+    }
+    .h3{
+        font-size: 1.25rem;
+    }
+    .linkedinb {
+        width: 181px;
+    }
+    .google {
+        width: 188px;
+    }
 }
 
 /* form */
