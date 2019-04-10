@@ -129,6 +129,14 @@ html, body{
         padding-right: 10px;
         padding-left: 2px;
     }
+    .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
 }
 
 @media screen and (min-width: 800px) {
