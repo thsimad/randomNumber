@@ -97,6 +97,10 @@ var UserSchema = new mongoose.Schema({
     },
     finassistance:{
         type: String
+    },
+    reminder:{
+        type: Boolean,
+        default: true
     }
 });
 

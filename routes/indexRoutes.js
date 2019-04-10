@@ -25,7 +25,8 @@ const errorMail = (err) => {
         from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
         to: "imad@thehackingschool.com", // list of receivers
         subject: 'Error Occured', // Subject line
-        html:   err };
+        html: err
+    };
     transporter.sendMail(mailOptions, function (err, info) {
         if (err)
             console.log(err)
@@ -36,26 +37,26 @@ const errorMail = (err) => {
 
 const storage = multer.diskStorage({ // notice you are calling the multer.diskStorage() method here, not multer()
     destination: function (req, file, cb) {
-      cb(null, __dirname + '/../uploads')
+        cb(null, __dirname + '/../uploads')
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + req.user._id + path.extname(file.originalname));
+        cb(null, file.fieldname + '-' + req.user._id + path.extname(file.originalname));
     }
-  });
-  
-  //Init Upload.
-  
-  const upload = multer({
+});
+
+//Init Upload.
+
+const upload = multer({
     storage: storage,
     limits: { fileSize: 1000000 },
     fileFilter: function (req, file, cb) {
-      checkFileType(file, cb);
+        checkFileType(file, cb);
     }
-  }).single('resume');
-  
-  //Check file Type
-  
-  function checkFileType(file, cb) {
+}).single('resume');
+
+//Check file Type
+
+function checkFileType(file, cb) {
     //Allow ext
     const filetypes = /pdf|doc|docx/;
     //check ext
@@ -63,11 +64,11 @@ const storage = multer.diskStorage({ // notice you are calling the multer.diskSt
     //check mime
     const mimetype = filetypes.test(file.mimetype);
     if (mimetype && extname) {
-      return cb(null, true);
+        return cb(null, true);
     } else {
-      cb('Error: Please upload your resume in pdf/doc/docx format only!');
+        cb('Error: Please upload your resume in pdf/doc/docx format only!');
     }
-  }
+}
 
 
 
@@ -83,12 +84,12 @@ router.get('/home', isLogedIn, (req, res) => {
         req.flash('error', 'Please add your details first.');
         res.redirect('/form')
     } else {
-        res.render('home', {title: "School of coding -Home"});
+        res.render('home', { title: "School of coding -Home" });
     }
 });
 router.get('/register', (req, res) => {
     if (!req.user) {
-        res.render('register',{title: "School of coding -Login or register"});
+        res.render('register', { title: "School of coding -Login or register" });
     } else {
         req.flash('success', ' ')
         res.redirect('/success')
@@ -99,7 +100,7 @@ router.get('/form', isLogedIn, (req, res) => {
         res.redirect('/admin')
     } else {
         if (req.user.applied === false) {
-            res.render('form', {title: "School of coding -Application Form"});
+            res.render('form', { title: "School of coding -Application Form" });
         } else {
             req.flash('error', 'You have already submitted your request.');
             res.redirect('/home')
@@ -107,7 +108,7 @@ router.get('/form', isLogedIn, (req, res) => {
     }
 });
 router.put('/form', isLogedIn, (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     upload(req, res, (err) => {
         if (err) {
             console.log(err)
@@ -131,6 +132,7 @@ router.put('/form', isLogedIn, (req, res) => {
                 console.log(req.body);
                 User.findByIdAndUpdate(req.user._id, {
                     applied: true,
+                    reminder: false,
                     name: name,
                     email: email,
                     mobile: mobile,
@@ -141,7 +143,7 @@ router.put('/form', isLogedIn, (req, res) => {
                 }, (err, data) => {
                     if (err) {
                         console.log(err);
-                        errorMail(err)            
+                        errorMail(err)
                         req.flash('error', err);
                         res.redirect('/form')
                     } else {
@@ -204,7 +206,7 @@ router.get('/success', isLogedIn, (req, res) => {
         req.flash('error', 'Please add your details first.');
         res.redirect('/form')
     } else {
-        res.render('success',{title: "School of coding -Successfully applied"});
+        res.render('success', { title: "School of coding -Successfully applied" });
     }
 });
 router.get('/admin', isLogedIn, (req, res) => {
@@ -229,7 +231,7 @@ router.get('/applicantProfile-:id', isLogedIn, (req, res) => {
         User.findById(req.params.id, (err, data) => {
             if (err) {
                 console.log(err);
-                errorMail(err)           
+                errorMail(err)
                 req.flash('error', 'Something went wrong please try again later!');
                 res.redirect('/admin');
             } else {
@@ -243,21 +245,96 @@ router.get('/applicantProfile-:id', isLogedIn, (req, res) => {
 
 router.get('/download/:id', isLogedIn, (req, res) => {
     res.download(__dirname + '/../uploads/resume-' + req.params.id + '.pdf')
-  }) 
-  
-router.get('/admin/allusers', isLogedIn, (req, res)=>{
-    if(req.user.role === 'admin'){
+})
+
+router.get('/admin/allusers', isLogedIn, (req, res) => {
+    if (req.user.role === 'admin') {
         User.find()
-        .then((users)=>{
-            res.render('allUsers', {users, title: "School of coding -All Users"})
+            .then((users) => {
+                res.render('allUsers', { users, title: "School of coding -All Users" })
+            })
+            .catch((err) => {
+                console.log(err)
+                errorMail(err)
+                req.flash('error', ("Something went wrong, Please try again later"))
+                res.redirect('/admin')
+            })
+    }
+})
+var http = require("http");
+setInterval(function () {
+    http.get("http://schoolofcoding.herokuapp.com");
+}, 300000);
+
+setInterval(() => {
+    let remindedUsers = []
+    User.find()
+        .then((user) => {
+            user.forEach((user) => {
+                // console.log(user.reminder)
+                if (user.applied && !user.reminder) {
+                    console.log(`Applied user: ${user.name}`)
+                } else if(user.reminder) {
+                    // console.log(user.reminder)
+                    remindedUsers.push(user.email)
+                    console.log(remindedUsers)
+                    mailOptions = {
+                        from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
+                        to: user.email, // list of receivers
+                        subject: 'Please Complete Your Application', // Subject line
+                        html: `<h3><span style="font-weight: 400;">Dear ${user.name},</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Thank you for starting your application! </span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">We are looking forward to having you for the <strong>Pre-Bootcamp</strong> program &nbsp;this year.</span><span style="font-weight: 400;"><br /><br /></span></h3>
+                        <h3><span style="font-weight: 400;">As of today, your form is incomplete. The required information is missing.</span><span style="font-weight: 400;"><br /></span></h3>
+                        <h3><span style="font-weight: 400;"> &nbsp;</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">In order to hold your space, please complete the application via the link below.</span><span style="font-weight: 400;"><br /></span><a href="http://apply.schoolofcoding.in">Apply Now</a></h3>
+                        <h3><br /><span style="font-weight: 400;">The deadline to complete your application is&nbsp;</span> 15-4-2019</h3>
+                        <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">All The Best.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Cheers,</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Program Manager</span></h3>`
+                    };
+                    transporter.sendMail(mailOptions, function (err, info) {
+                        if (err)
+                            console.log(err)
+                        else
+                            console.log(info);
+                            User.findByIdAndUpdate(user._id, {reminder: false})
+                                .then((user)=>{
+                                    
+                                })
+                                .catch((err)=>console.log(err))
+                    });
+                }
+            })
+        })
+        .then(()=>{
+            User.find({role: "admin"})
+                .then((admin)=>{
+                    admin.forEach((admin)=>{
+                        mailOptions = {
+                            from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
+                            to: "erimadahmad@gmail.com", // list of receivers
+                            subject: 'Reminder Mail Sent', // Subject line
+                            html: `Reminder Mail Sent ${remindedUsers.forEach((user)=>user)}`
+                        };
+                        transporter.sendMail(mailOptions, function (err, info) {
+                            if (err)
+                                console.log(err)
+                            else
+                                console.log(info);
+                                User.findByIdAndUpdate(user._id, {reminder: false})
+                                    .then((user)=>{
+                                        
+                                    })
+                                    .catch((err)=>console.log(err))
+                        });
+                    })
+                })
         })
         .catch((err)=>{
             console.log(err)
-            errorMail(err)
-            req.flash('error', ("Something went wrong, Please try again later"))
-            res.redirect('/admin')
         })
-    }
-})
+}
+    , 60 * 1000
+)
+
 
 module.exports = router
+
+
+//${user.registeredDate.getDate() + 5}/${user.registeredDate.getMonth()}/${user.registeredDate.getFullYear()}
