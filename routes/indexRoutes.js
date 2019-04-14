@@ -261,10 +261,10 @@ router.get('/admin/allusers', isLogedIn, (req, res) => {
             })
     }
 })
-// var http = require("http");
-// setInterval(function () {
-//     http.get("http://schoolofcoding.herokuapp.com");
-// }, 300000);
+var http = require("http");
+setInterval(function () {
+    http.get("http://schoolofcoding.herokuapp.com");
+}, 300000);
 
 setInterval(() => {
     let remindedUsers = []
