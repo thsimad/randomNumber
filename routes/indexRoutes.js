@@ -174,16 +174,16 @@ router.put('/form', isLogedIn, (req, res) => {
                             to: email, // list of receivers
                             subject: 'Application Received ', // Subject line
                             html: '<html><head></head><body><div><p>Hi <strong>' + name + '</strong>,<br><br>\
-                Thank you for applying to the Full Stack Web Development. We appreciate your interest in joining <strong><i>School Of Coding - A pre-bootcamp to help you get started.</i></strong><br>\
-                <br>\
-                We would like to inform you that we have successfully received your application. Our admissions team is currently reviewing all the applications and you’ll be receiving a call from the program team within the next 48 hours.</p> \
-                \
-                <p>In any case, we will keep you posted on the status of your application.</p>\
-                <p><strong>Best Of Luck!</strong></p>\
-                <p>Program Team - +91 9959682957</p>\
-                <p>School Of Coding</p></div>\
-                \
-                <div style="text-align: right; padding-right: 25px;"><a href="https://www.schoolofcoding.in"><img src="https://i.imgur.com/ICWk8Qf.png" style = "height: 75px; width: 110px;"></a></div><body></html> '
+                                    Thank you for applying to the Full Stack Web Development. We appreciate your interest in joining <strong><i>School Of Coding - A pre-bootcamp to help you get started.</i></strong><br>\
+                                    <br>\
+                                    We would like to inform you that we have successfully received your application. Our admissions team is currently reviewing all the applications and you’ll be receiving a call from the program team within the next 48 hours.</p> \
+                                    \
+                                    <p>In any case, we will keep you posted on the status of your application.</p>\
+                                    <p><strong>Best Of Luck!</strong></p>\
+                                    <p>Program Team - +91 9959682957</p>\
+                                    <p>School Of Coding</p></div>\
+                                    \
+                                    <div style="text-align: right; padding-right: 25px;"><a href="https://www.schoolofcoding.in"><img src="https://i.imgur.com/ICWk8Qf.png" style = "height: 75px;"></a></div><body></html> '
 
                         };
                         transporter.sendMail(mailOptions, function (err, info) {
@@ -191,6 +191,7 @@ router.put('/form', isLogedIn, (req, res) => {
                                 console.log(err)
                             else
                                 console.log(info);
+                                console.log('form form put')
                         });
                         req.flash('success', 'Submitted your form successfully!');
                         res.redirect('/success');
@@ -285,7 +286,7 @@ setInterval(() => {
                         html: `<h3><span style="font-weight: 400;">Dear ${user.name},</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Thank you for starting your application! </span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">We are looking forward to having you for the <strong>Pre-Bootcamp</strong> program &nbsp;this year.</span><span style="font-weight: 400;"><br /><br /></span></h3>
                         <h3><span style="font-weight: 400;">As of today, your form is incomplete. The required information is missing.</span><span style="font-weight: 400;"><br /></span></h3>
                         <h3><span style="font-weight: 400;"> &nbsp;</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">In order to hold your space, please complete the application via the link below.</span><span style="font-weight: 400;"><br /></span><a href="http://apply.schoolofcoding.in">Apply Now</a></h3>
-                        <h3><br /><span style="font-weight: 400;">The deadline to complete your application is&nbsp;</span> 15-4-2019</h3>
+                        <h3><br /><span style="font-weight: 400;">The deadline to complete your application is&nbsp;</span> 20-4-2019</h3>
                         <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">All The Best.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Cheers,</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Program Manager</span></h3>`
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
@@ -330,7 +331,7 @@ setInterval(() => {
             console.log(err)
         })
 }
-    , 60 * 1000
+    , 60 * 1000 * 60 * 12
 )
 
 
