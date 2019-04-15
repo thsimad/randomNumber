@@ -220,7 +220,7 @@ router.get('/admin', isLogedIn, (req, res) => {
                 req.flash('error', 'Something went wrong. Please try again later.');
                 res.redirect('/home')
             } else {
-                console.log(data);
+                // console.log(data);
                 res.render('admin', { data: data, title: "School of coding -Admin" });
             }
         })
@@ -267,17 +267,17 @@ router.get('/admin/allusers', isLogedIn, (req, res) => {
     }
 })
 
-router.get('/admin/newsletter', isLogedIn, (req, res) => {
-    if (req.user.role === 'admin') {
-        res.render('adminNewsletter')
-    }
-})
+// router.get('/admin/newsletter', isLogedIn, (req, res) => {
+//     if (req.user.role === 'admin') {
+//         res.render('adminNewsletter')
+//     }
+// })
 
-router.post('/admin/newsletter', isLogedIn, (req, res) => {
-    if (req.user.role === 'admin') {
-        console.log(req.body)
-    }
-})
+// router.post('/admin/newsletter', isLogedIn, (req, res) => {
+//     if (req.user.role === 'admin') {
+//         console.log(req.body)
+//     }
+// })
 
 //always on code for heroku.
 var http = require("http");
@@ -293,10 +293,10 @@ setInterval(() => {
         .then((user) => {
             user.forEach((user) => {
                 // console.log(user.reminder)
-                if (user.applied && !user.reminder) {
+                if (user.applied) {
                     console.log(`Applied user: ${user.name}`)
-                } else if (user.reminder) {
-                    // console.log(user.reminder)
+                } else if (!user.applied && user.reminder === undefined) {
+                    console.log('user not applied & reminder is undefined')
                     remindedUsers.push(user.email)
                     console.log(remindedUsers)
                     mailOptions = {
@@ -312,12 +312,15 @@ setInterval(() => {
                         <h3><span style="font-weight: 400;">You can restart your application by following the link below</span></h3>
                         <h3><a href="http://apply.schoolofcoding.in/"><strong>Apply Now</strong></a></h3>
                         <h3>&nbsp;</h3>
-                        <h3><span style="font-weight: 400;">P.S: The deadline to complete your application is </span><strong>&nbsp;15-4-2019</strong></h3>
+                        <h3><span style="font-weight: 400;">P.S: The deadline to complete your application is </span><strong>&nbsp;17-4-2019</strong></h3>
                         <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span></h3>
                         <h3>&nbsp;</h3>
                         <h3><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span></h3>
                         <h3>&nbsp;</h3>
-                        <h3><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span></h3>`
+                        <h3><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span></h3>
+                        <h3><span style="font-weight: 400;"></h3>
+                        <h3><span style="font-weight: 400;">All The Best.</h3>
+                        <h3><span style="font-weight: 400;">Cheers,<br>Program Manager</h3>`
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err)
@@ -326,7 +329,46 @@ setInterval(() => {
                             console.log(info);
                         User.findByIdAndUpdate(user._id, { reminder: false })
                             .then((user) => {
-
+                                console.log(`Reminder false for ${user.name}`)
+                            })
+                            .catch((err) => console.log(err))
+                    });
+                } else if (!user.applied && user.reminder) {
+                    // console.log(user.reminder)
+                    console.log('user not applied & reminder is not undefined')
+                    remindedUsers.push(user.email)
+                    console.log(remindedUsers)
+                    mailOptions = {
+                        from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
+                        to: user.email, // list of receivers
+                        subject: 'Please Complete Your Application', // Subject line
+                        html: `<h3><span style="font-weight: 400;">Dear ${user.name},</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">Thank you for starting your application! </span></h3>
+                        <h3><span style="font-weight: 400;">We are looking forward to having you for the </span><strong>Pre-Bootcamp</strong><span style="font-weight: 400;"> program &nbsp;this year.</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><strong>As of today, your form is incomplete. Please complete your application by 17-04-2019 for us to consider you for the next cohort.</strong></h3>
+                        <h3><span style="font-weight: 400;">You can restart your application by following the link below</span></h3>
+                        <h3><a href="http://apply.schoolofcoding.in/"><strong>Apply Now</strong></a></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">P.S: The deadline to complete your application is </span><strong>&nbsp;17-4-2019</strong></h3>
+                        <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span></h3>
+                        <h3><span style="font-weight: 400;"></h3>
+                        <h3><span style="font-weight: 400;">All The Best.</h3>
+                        <h3><span style="font-weight: 400;">Cheers,<br>Program Manager</h3>`
+                    };
+                    transporter.sendMail(mailOptions, function (err, info) {
+                        if (err)
+                            console.log(err)
+                        else
+                            console.log(info);
+                        User.findByIdAndUpdate(user._id, { reminder: false })
+                            .then((user) => {
+                                console.log(`Reminder false for ${user.name}`)
                             })
                             .catch((err) => console.log(err))
                     });
@@ -338,16 +380,17 @@ setInterval(() => {
                 from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
                 to: "erimadahmad@gmail.com", // list of receivers
                 subject: 'Reminder Mail Sent', // Subject line
-                html: `Reminder Mail Sent ${remindedUsers.forEach((user) => user)}`
+                html: `Reminder Mail Sent ${remindedUsers}`
             };
             transporter.sendMail(mailOptions, function (err, info) {
                 if (err)
                     console.log(err)
                 else
-                    console.log(info);
+                    console.log(remindedUsers)
+                console.log(info);
                 User.findByIdAndUpdate(user._id, { reminder: false })
                     .then((user) => {
-
+                        console.log('Reminded')
                     })
                     .catch((err) => console.log(err))
             });
@@ -355,6 +398,7 @@ setInterval(() => {
         .catch((err) => {
             console.log(err)
         })
+    console.log('finished')
 }
     , 60 * 1000 * 60 * 12
 )

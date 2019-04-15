@@ -135,14 +135,15 @@
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Applied Users</h5>
                                         <span class="h2 font-weight-bold mb-0">
+                                            <%let appliedUsers=0;%>
                                             <% data.forEach((user)=>{%>
                                             <% if(user.applied === true){%>
-                                            <%let appliedUsers=[];%>
-                                            <%appliedUsers.push(user)%>
-                                            <%=appliedUsers.length%>
+                                            <%appliedUsers  += 1%>
                                             <%}else{%>
                                             <%}%>
-                                            <%})%></span>
+                                            <%})%>
+                                            <%=appliedUsers%>
+                                        </span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -166,14 +167,14 @@
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Shortlisted</h5>
                                         <span class="h2 font-weight-bold mb-0">
+                                            <%let shortlisted=0;%>
                                             <% data.forEach((user)=>{%>
                                             <% if(user.Shortlisted === true){%>
-                                            <%let appliedUsers=[];%>
-                                            <%appliedUsers.push(user)%>
-                                            <%=appliedUsers.length%>
+                                            <%shortlisted += 1%>
                                             <%}else{%>
                                             <%}%>
                                             <%})%>
+                                            <%=shortlisted%>
                                         </span>
                                     </div>
                                     <div class="col-auto">
