@@ -282,7 +282,7 @@ router.post('/admin/newsletter', isLogedIn, (req, res) => {
 //always on code for heroku.
 var http = require("http");
 setInterval(function () {
-    http.get("http://testimad.herokuapp.com");
+    http.get("http://schoolofcoding.herokuapp.com");
 }, 300000);
 
 
@@ -356,7 +356,7 @@ setInterval(() => {
             console.log(err)
         })
 }
-    , 60 * 1000 * 60 * 1
+    , 60 * 1000 * 60 * 12
 )
 
 
