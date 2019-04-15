@@ -261,7 +261,11 @@
                             </td>
                             <td style="text-align: center;">
                                 <%if(user.appliedOn){%>
-                                <%=user.appliedOn.getDate()%>/<%=user.appliedOn.getMonth()%>/<%=user.appliedOn.getFullYear()%>
+                                    <%if(user.appliedOn.length != 0){%>
+                                        -
+                                    <%}else{%>
+                                    <%=user.appliedOn.getDate()%>/<%=user.appliedOn.getMonth()%>/<%=user.appliedOn.getFullYear()%>
+                                <%}%>
                             </td>
                             <%}else{%>
                             -
