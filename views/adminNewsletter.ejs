@@ -1,0 +1,96 @@
+<% include partials/adminHeader %>
+<!-- Main content -->
+<div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+        <div class="container-fluid">
+            <!-- Brand -->
+            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href=" /admin">Dashboard</a>
+            <ul class="navbar-nav align-items-center d-none d-md-flex">
+                <li class="nav-item dropdown">
+                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <div class="media align-items-center">
+                            <span class="avatar avatar-sm rounded-circle">
+                                <%if(user){%>
+                                <%if(user.linkedinProfileUrl === undefined){%>
+                                <img src="https://i.imgur.com/V0ZBBeO.png" alt="<%=user.name%>">
+                                <%}else{%>
+                                <img src="<%=user.linkedinProfileUrl%>" alt="<%=user.name%>">
+                                <%}%>
+                                <%}else{%>
+                                <%}%>
+                            </span>
+                            <div class="media-body ml-2 d-none d-lg-block">
+                                <span class="mb-0 text-sm  font-weight-bold"><%=user.name%></span>
+                        </div>
+        </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+            </div>
+            <a href=" /examples/profile.html" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+            </a>
+            <a href=" /examples/profile.html" class="dropdown-item">
+                <i class="ni ni-settings-gear-65"></i>
+                <span>Settings</span>
+            </a>
+            <a href=" /examples/profile.html" class="dropdown-item">
+                <i class="ni ni-calendar-grid-58"></i>
+                <span>Activity</span>
+            </a>
+            <a href=" /examples/profile.html" class="dropdown-item">
+                <i class="ni ni-support-16"></i>
+                <span>Support</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#!" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+        </li>
+        </ul>
+</div>
+</nav>
+<!-- Header -->
+
+<!-- Page content -->
+<div style="padding-top: 10%" class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h3 class="mb-0">Send Email</h3>
+                </div>
+                <div class="form">
+                    <form id="newsletters">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">To</label>
+                            <select name="email" id="email" required class="form-control" id="exampleFormControlSelect1">
+                                <option value="all">All</option>
+                                <option value="applied">Applied</option>
+                                <option value="notApplied">Not Applied</option>
+                                <option value="ex">Ex-Students</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input class="form-control" name="subject" required id="subject" type="text" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Body</label>
+                            <textarea class="form-control" name="message" id="message" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-secondary" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include partials/adminFooter %>

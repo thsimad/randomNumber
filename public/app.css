@@ -5,7 +5,7 @@ html, body{
     background-color: rgb(241, 240, 240)
 }
 .logo{
-    height: 74px;
+    height: 74px !important;
 }
 .navpadding{
     padding-right: 50px;
@@ -166,4 +166,14 @@ html, body{
 }
 #back3{
     cursor: pointer;
+}
+.dataTables_wrapper {
+   padding: 15px !important;
+}
+
+.font25{
+    font-size: 25px;
+}
+    form{
+    padding:30px;
 }

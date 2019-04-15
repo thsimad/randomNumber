@@ -12,6 +12,13 @@ var UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    appliedOn:{
+        type: String
+    },
+    completed: {
+        type: Boolean,
+        default: false
+    }, 
 	name: String,
 	linkedinId: {
      type: String   

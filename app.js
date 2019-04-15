@@ -42,6 +42,7 @@ app.use(compression());
 app.set('view engine', 'ejs');
 //config bodyParser
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 //making public folder static
 app.use(express.static('public'));
 //config methodOverride for put and delete routes

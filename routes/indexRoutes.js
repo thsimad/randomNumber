@@ -133,6 +133,7 @@ router.put('/form', isLogedIn, (req, res) => {
                 User.findByIdAndUpdate(req.user._id, {
                     applied: true,
                     reminder: false,
+                    appliedOn: Date.now(),
                     name: name,
                     email: email,
                     mobile: mobile,
@@ -191,7 +192,7 @@ router.put('/form', isLogedIn, (req, res) => {
                                 console.log(err)
                             else
                                 console.log(info);
-                                console.log('form form put')
+                            console.log('form form put')
                         });
                         req.flash('success', 'Submitted your form successfully!');
                         res.redirect('/success');
@@ -260,13 +261,32 @@ router.get('/admin/allusers', isLogedIn, (req, res) => {
                 req.flash('error', ("Something went wrong, Please try again later"))
                 res.redirect('/admin')
             })
+    } else {
+        req.flash('You donot have access to that page.')
+        res.redirect('/')
     }
 })
+
+router.get('/admin/newsletter', isLogedIn, (req, res) => {
+    if (req.user.role === 'admin') {
+        res.render('adminNewsletter')
+    }
+})
+
+router.post('/admin/newsletter', isLogedIn, (req, res) => {
+    if (req.user.role === 'admin') {
+        console.log(req.body)
+    }
+})
+
+//always on code for heroku.
 var http = require("http");
 setInterval(function () {
     http.get("http://testimad.herokuapp.com");
 }, 300000);
 
+
+//Reminder email code.
 setInterval(() => {
     let remindedUsers = []
     User.find()
@@ -275,7 +295,7 @@ setInterval(() => {
                 // console.log(user.reminder)
                 if (user.applied && !user.reminder) {
                     console.log(`Applied user: ${user.name}`)
-                } else if(user.reminder) {
+                } else if (user.reminder) {
                     // console.log(user.reminder)
                     remindedUsers.push(user.email)
                     console.log(remindedUsers)
@@ -283,55 +303,60 @@ setInterval(() => {
                         from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
                         to: user.email, // list of receivers
                         subject: 'Please Complete Your Application', // Subject line
-                        html: `<h3><span style="font-weight: 400;">Dear ${user.name},</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Thank you for starting your application! </span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">We are looking forward to having you for the <strong>Pre-Bootcamp</strong> program &nbsp;this year.</span><span style="font-weight: 400;"><br /><br /></span></h3>
-                        <h3><span style="font-weight: 400;">As of today, your form is incomplete. The required information is missing.</span><span style="font-weight: 400;"><br /></span></h3>
-                        <h3><span style="font-weight: 400;"> &nbsp;</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">In order to hold your space, please complete the application via the link below.</span><span style="font-weight: 400;"><br /></span><a href="http://apply.schoolofcoding.in">Apply Now</a></h3>
-                        <h3><br /><span style="font-weight: 400;">The deadline to complete your application is&nbsp;</span> 20-4-2019</h3>
-                        <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">All The Best.</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Cheers,</span><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Program Manager</span></h3>`
+                        html: `<h3><span style="font-weight: 400;">Dear ${user.name},</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">Thank you for starting your application! </span></h3>
+                        <h3><span style="font-weight: 400;">We are looking forward to having you for the </span><strong>Pre-Bootcamp</strong><span style="font-weight: 400;"> program &nbsp;this year.</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><strong>As of today, your form is incomplete. Please complete your application by 17-04-2019 for us to consider you for the next cohort.</strong></h3>
+                        <h3><span style="font-weight: 400;">You can restart your application by following the link below</span></h3>
+                        <h3><a href="http://apply.schoolofcoding.in/"><strong>Apply Now</strong></a></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">P.S: The deadline to complete your application is </span><strong>&nbsp;15-4-2019</strong></h3>
+                        <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span></h3>
+                        <h3>&nbsp;</h3>
+                        <h3><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span></h3>`
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err)
                             console.log(err)
                         else
                             console.log(info);
-                            User.findByIdAndUpdate(user._id, {reminder: false})
-                                .then((user)=>{
-                                    
-                                })
-                                .catch((err)=>console.log(err))
+                        User.findByIdAndUpdate(user._id, { reminder: false })
+                            .then((user) => {
+
+                            })
+                            .catch((err) => console.log(err))
                     });
                 }
             })
         })
-        .then(()=>{
-            User.find({role: "admin"})
-                .then((admin)=>{
-                    admin.forEach((admin)=>{
-                        mailOptions = {
-                            from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
-                            to: "erimadahmad@gmail.com", // list of receivers
-                            subject: 'Reminder Mail Sent', // Subject line
-                            html: `Reminder Mail Sent ${remindedUsers.forEach((user)=>user)}`
-                        };
-                        transporter.sendMail(mailOptions, function (err, info) {
-                            if (err)
-                                console.log(err)
-                            else
-                                console.log(info);
-                                User.findByIdAndUpdate(user._id, {reminder: false})
-                                    .then((user)=>{
-                                        
-                                    })
-                                    .catch((err)=>console.log(err))
-                        });
+        .then(() => {
+            mailOptions = {
+                from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
+                to: "erimadahmad@gmail.com", // list of receivers
+                subject: 'Reminder Mail Sent', // Subject line
+                html: `Reminder Mail Sent ${remindedUsers.forEach((user) => user)}`
+            };
+            transporter.sendMail(mailOptions, function (err, info) {
+                if (err)
+                    console.log(err)
+                else
+                    console.log(info);
+                User.findByIdAndUpdate(user._id, { reminder: false })
+                    .then((user) => {
+
                     })
-                })
+                    .catch((err) => console.log(err))
+            });
         })
-        .catch((err)=>{
+        .catch((err) => {
             console.log(err)
         })
 }
-    , 60 * 1000 * 60 * 2
+    , 60 * 1000
 )
 
 

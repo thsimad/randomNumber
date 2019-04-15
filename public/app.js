@@ -3,4 +3,5 @@ $(window).on('load', function(){
     setTimeout(function(){ 
         window.location.replace("https://schoolofcoding.in/");
      }, 3000);
+
 });
