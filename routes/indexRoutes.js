@@ -356,7 +356,7 @@ setInterval(() => {
             console.log(err)
         })
 }
-    , 60 * 1000
+    , 60 * 1000 * 60 * 1
 )
 
 
