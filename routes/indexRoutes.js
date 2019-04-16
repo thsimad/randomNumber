@@ -405,7 +405,7 @@ setInterval(() => {
         })
     console.log('finished')
 }
-    , 60 * 1000 * 60
+    , 60 * 1000 * 60 *12
 )
 
 
