@@ -8,6 +8,7 @@ const express = require('express'),
     router = express.Router();
 //home route
 let transporter = nodemailer.createTransport({
+    pool: true,
     host: 'malihasystemscom.ipage.com',
     port: 587,
     secure: false,
@@ -299,40 +300,6 @@ setInterval(() => {
                     console.log('user not applied & reminder is undefined')
                     remindedUsers.push(user.email)
                     console.log(remindedUsers)
-                    mailOptions = {
-                        from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
-                        to: user.email, // list of receivers
-                        subject: 'Please Complete Your Application', // Subject line
-                        html: `<h3><span style="font-weight: 400;">Dear ${user.name},</span></h3>
-                        <h3>&nbsp;</h3>
-                        <h3><span style="font-weight: 400;">Thank you for starting your application! </span></h3>
-                        <h3><span style="font-weight: 400;">We are looking forward to having you for the </span><strong>Pre-Bootcamp</strong><span style="font-weight: 400;"> program &nbsp;this year.</span></h3>
-                        <h3>&nbsp;</h3>
-                        <h3><strong>As of today, your form is incomplete. Please complete your application by 17-04-2019 for us to consider you for the next cohort.</strong></h3>
-                        <h3><span style="font-weight: 400;">You can restart your application by following the link below</span></h3>
-                        <h3><a href="http://apply.schoolofcoding.in/"><strong>Apply Now</strong></a></h3>
-                        <h3>&nbsp;</h3>
-                        <h3><span style="font-weight: 400;">P.S: The deadline to complete your application is </span><strong>&nbsp;17-4-2019</strong></h3>
-                        <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span></h3>
-                        <h3>&nbsp;</h3>
-                        <h3><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span></h3>
-                        <h3>&nbsp;</h3>
-                        <h3><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span></h3>
-                        <h3><span style="font-weight: 400;"></h3>
-                        <h3><span style="font-weight: 400;">All The Best.</h3>
-                        <h3><span style="font-weight: 400;">Cheers,<br>Program Manager</h3>`
-                    };
-                    transporter.sendMail(mailOptions, function (err, info) {
-                        if (err)
-                            console.log(err)
-                        else
-                            console.log(info);
-                        User.findByIdAndUpdate(user._id, { reminder: false })
-                            .then((user) => {
-                                console.log(`Reminder false for ${user.name}`)
-                            })
-                            .catch((err) => console.log(err))
-                    });
                 } else if (!user.applied && user.reminder) {
                     // console.log(user.reminder)
                     console.log('user not applied & reminder is not undefined')
@@ -378,6 +345,44 @@ setInterval(() => {
         .then(() => {
             mailOptions = {
                 from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
+                to: remindedUsers, // list of receivers
+                subject: 'Please Complete Your Application', // Subject line
+                html: `<h3><span style="font-weight: 400;">Dear ${user.name},</span></h3>
+                <h3>&nbsp;</h3>
+                <h3><span style="font-weight: 400;">Thank you for starting your application! </span></h3>
+                <h3><span style="font-weight: 400;">We are looking forward to having you for the </span><strong>Pre-Bootcamp</strong><span style="font-weight: 400;"> program &nbsp;this year.</span></h3>
+                <h3>&nbsp;</h3>
+                <h3><strong>As of today, your form is incomplete. Please complete your application by 17-04-2019 for us to consider you for the next cohort.</strong></h3>
+                <h3><span style="font-weight: 400;">You can restart your application by following the link below</span></h3>
+                <h3><a href="http://apply.schoolofcoding.in/"><strong>Apply Now</strong></a></h3>
+                <h3>&nbsp;</h3>
+                <h3><span style="font-weight: 400;">P.S: The deadline to complete your application is </span><strong>&nbsp;17-4-2019</strong></h3>
+                <h3><span style="font-weight: 400;">If you&rsquo;ve any questions, just hit reply to this mail.</span></h3>
+                <h3>&nbsp;</h3>
+                <h3><span style="font-weight: 400;">If you don&rsquo;t plan to complete this application because you&rsquo;ll be not joining this year, please reply to this email and let us know so we can open this spot to others.</span></h3>
+                <h3>&nbsp;</h3>
+                <h3><span style="font-weight: 400;">Please don&rsquo;t hesitate to contact me with any questions/ concerns regarding your application.</span></h3>
+                <h3><span style="font-weight: 400;"></h3>
+                <h3><span style="font-weight: 400;">All The Best.</h3>
+                <h3><span style="font-weight: 400;">Cheers,<br>Program Manager</h3>`
+            };
+            transporter.sendMail(mailOptions, function (err, info) {
+                if (err)
+                    console.log(err)
+                else
+                    errorMail(err)
+                    console.log(info);
+                User.findByIdAndUpdate(user._id, { reminder: false })
+                    .then((user) => {
+                        console.log(`Reminder false for ${user.name}`)
+                    })
+                    .catch((err) =>{
+                        errorMail(err)
+                         console.log(err)
+                        })
+            });
+            mailOptions = {
+                from: '"School Of Coding" <info@schoolofcoding.in>', // sender address
                 to: "erimadahmad@gmail.com", // list of receivers
                 subject: 'Reminder Mail Sent', // Subject line
                 html: `Reminder Mail Sent ${remindedUsers}`
@@ -400,7 +405,7 @@ setInterval(() => {
         })
     console.log('finished')
 }
-    , 60 * 1000 * 60 * 12
+    , 60 * 1000 * 60
 )
 
 
