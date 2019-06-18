@@ -1,14 +1,17 @@
 let randomNumber = Math.floor(Math.random() * 11);
-function check(){
+console.log(randomNumber)
+function check() {
     let input = document.getElementById('guessedNumber').value;
     let message = document.getElementById('message');
-    if(input == randomNumber){
+    if (input == randomNumber) {
         message.innerHTML = `<p style = 'color: green;'>Hey You Have Guessed It Right.</p>`;
-    }else if(input > randomNumber){
+        randomNumber = Math.floor(Math.random() * 11);
+        console.log(randomNumber)
+    } else if (input > randomNumber) {
         message.innerHTML = `<p style = 'color: red;'>Number is too high.</p>`;
-    }else if(input < randomNumber){
+    } else if (input < randomNumber) {
         message.innerHTML = `<p style = 'color: red;'>Number is too low.</p>`;
-    }else{
+    } else {
         message.innerHTML = `<p style = 'color: red;'>Please add something</p>`;
     }
 }
